@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cl.usach.sessionbeans.kanbanizebeans;
+package cl.usach.kanbanizesessionbeans;
 
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
