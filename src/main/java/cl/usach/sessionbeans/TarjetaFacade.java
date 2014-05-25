@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class TarjetaFacade extends AbstractFacade<Tarjeta> implements TarjetaFacadeLocal {
-    @PersistenceContext(unitName = "cl.usach_Mutliproy-ejb_ejb_1.0PU")
+    @PersistenceContext(unitName = "MultiproyPU")
     private EntityManager em;
 
     @Override

@@ -18,7 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class GrupoFacade extends AbstractFacade<Grupo> implements GrupoFacadeLocal {
-    @PersistenceContext(unitName = "cl.usach_Mutliproy-ejb_ejb_1.0PU")
+    @PersistenceContext(unitName = "MultiproyPU")
     private EntityManager em;
 
     @Override

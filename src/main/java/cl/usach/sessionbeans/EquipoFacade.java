@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacadeLocal {
-    @PersistenceContext(unitName = "cl.usach_Mutliproy-ejb_ejb_1.0PU")
+    @PersistenceContext(unitName = "MultiproyPU")
     private EntityManager em;
 
     @Override

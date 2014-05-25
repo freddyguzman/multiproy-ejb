@@ -18,7 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class TableroFacade extends AbstractFacade<Tablero> implements TableroFacadeLocal {
-    @PersistenceContext(unitName = "cl.usach_Mutliproy-ejb_ejb_1.0PU")
+    @PersistenceContext(unitName = "MultiproyPU")
     private EntityManager em;
 
     @Override
