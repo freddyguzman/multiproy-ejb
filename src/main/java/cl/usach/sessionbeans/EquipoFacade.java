@@ -9,6 +9,7 @@ package cl.usach.sessionbeans;
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
 import cl.usach.entities.Tablero;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -53,7 +54,32 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
             return true;
         }
     }
-    
-    
-    
+
+    @Override
+    public List<Equipo> buscarPorCuenta(Cuenta cuenta) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByCuenta")
+                .setParameter("idCuenta", cuenta);
+        return query.getResultList();
+    }
+
+    @Override
+    public Boolean existeEquipoPorTablero(Tablero tablero) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByTablero")
+                .setParameter("idTablero", tablero);
+        if(query.getResultList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public Equipo buscarUnEquipoPoTablero(Tablero tablero) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByTablero")
+                .setParameter("idTablero", tablero);
+        return (Equipo) query.getResultList().get(0);
+    }  
 }

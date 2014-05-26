@@ -36,5 +36,11 @@ public interface EquipoFacadeLocal {
     Equipo buscarPorCuentaYTablero(Cuenta cuenta, String idTableroExt);
 
     Boolean existeEquipoPorCuentaYTablero(Cuenta cuenta, String idTableroExt);
+
+    List<Equipo> buscarPorCuenta(Cuenta cuenta);
+
+    Boolean existeEquipoPorTablero(Tablero tablero);
+
+    Equipo buscarUnEquipoPoTablero(Tablero tablero);
     
 }
