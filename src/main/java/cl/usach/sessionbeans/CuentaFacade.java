@@ -47,6 +47,26 @@ public class CuentaFacade extends AbstractFacade<Cuenta> implements CuentaFacade
                 .setParameter("idUsuario", usuario);
         return query.getResultList();
     }
+
+    @Override
+    public Boolean existeCuentaPorUsuarioCuenta(String usuarioCuenta) {
+        Query query;
+        query = em.createNamedQuery("Cuenta.findByNombreUsuarioCuenta")
+                .setParameter("nombreUsuarioCuenta", usuarioCuenta);
+        if(query.getResultList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public Cuenta buscarPorNombreUsuarioCuenta(String nombreUsuarioCuenta) {
+        Query query;
+        query = em.createNamedQuery("Cuenta.findByNombreUsuarioCuenta")
+                .setParameter("nombreUsuarioCuenta", nombreUsuarioCuenta);
+        return (Cuenta) query.getSingleResult();
+    }
     
     
 }

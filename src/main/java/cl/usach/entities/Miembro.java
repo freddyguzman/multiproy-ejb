@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,8 +38,21 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Miembro.findByIdMiembro", query = "SELECT m FROM Miembro m WHERE m.idMiembro = :idMiembro"),
     @NamedQuery(name = "Miembro.findByIdMiembroExt", query = "SELECT m FROM Miembro m WHERE m.idMiembroExt = :idMiembroExt"),
     @NamedQuery(name = "Miembro.findByNombreUsuarioMiembro", query = "SELECT m FROM Miembro m WHERE m.nombreUsuarioMiembro = :nombreUsuarioMiembro"),
-    @NamedQuery(name = "Miembro.findByIdUsuarioMiembro", query = "SELECT m FROM Miembro m WHERE m.idUsuarioMiembro = :idUsuarioMiembro")})
+    @NamedQuery(name = "Miembro.findByidTablero", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero"),
+    @NamedQuery(name = "Miembro.findByidTableroYIdMiembroExt", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero and m.idMiembroExt = :idMiembroExt")
+})
 public class Miembro implements Serializable {
+    @JoinColumn(name = "ID_TABLERO", referencedColumnName = "ID_TABLERO")
+    @ManyToOne(optional = false)
+    private Tablero idTablero;
+    @JoinColumn(name = "ID_CUENTA", referencedColumnName = "ID_CUENTA")
+    @ManyToOne
+    private Cuenta idCuenta;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "ID_MIEMBRO_EXT")
+    private String idMiembroExt;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,15 +61,9 @@ public class Miembro implements Serializable {
     private Integer idMiembro;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_MIEMBRO_EXT")
-    private int idMiembroExt;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "NOMBRE_USUARIO_MIEMBRO")
     private String nombreUsuarioMiembro;
-    @Column(name = "ID_USUARIO_MIEMBRO")
-    private Integer idUsuarioMiembro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMiembro")
     private List<DetalleUsuarioTarjeta> detalleUsuarioTarjetaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMiembro")
@@ -67,8 +76,14 @@ public class Miembro implements Serializable {
         this.idMiembro = idMiembro;
     }
 
-    public Miembro(Integer idMiembro, int idMiembroExt, String nombreUsuarioMiembro) {
+    public Miembro(Integer idMiembro, String idMiembroExt, String nombreUsuarioMiembro) {
         this.idMiembro = idMiembro;
+        this.idMiembroExt = idMiembroExt;
+        this.nombreUsuarioMiembro = nombreUsuarioMiembro;
+    }
+
+    public Miembro(Tablero idTablero, String idMiembroExt, String nombreUsuarioMiembro) {
+        this.idTablero = idTablero;
         this.idMiembroExt = idMiembroExt;
         this.nombreUsuarioMiembro = nombreUsuarioMiembro;
     }
@@ -81,11 +96,11 @@ public class Miembro implements Serializable {
         this.idMiembro = idMiembro;
     }
 
-    public int getIdMiembroExt() {
+    public String getIdMiembroExt() {
         return idMiembroExt;
     }
 
-    public void setIdMiembroExt(int idMiembroExt) {
+    public void setIdMiembroExt(String idMiembroExt) {
         this.idMiembroExt = idMiembroExt;
     }
 
@@ -95,14 +110,6 @@ public class Miembro implements Serializable {
 
     public void setNombreUsuarioMiembro(String nombreUsuarioMiembro) {
         this.nombreUsuarioMiembro = nombreUsuarioMiembro;
-    }
-
-    public Integer getIdUsuarioMiembro() {
-        return idUsuarioMiembro;
-    }
-
-    public void setIdUsuarioMiembro(Integer idUsuarioMiembro) {
-        this.idUsuarioMiembro = idUsuarioMiembro;
     }
 
     @XmlTransient
@@ -147,5 +154,21 @@ public class Miembro implements Serializable {
     public String toString() {
         return "cl.usach.entities.Miembro[ idMiembro=" + idMiembro + " ]";
     }
-    
+
+    public Tablero getIdTablero() {
+        return idTablero;
+    }
+
+    public void setIdTablero(Tablero idTablero) {
+        this.idTablero = idTablero;
+    }
+
+    public Cuenta getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(Cuenta idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+ 
 }

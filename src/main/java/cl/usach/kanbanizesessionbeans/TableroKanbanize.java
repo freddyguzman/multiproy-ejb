@@ -8,6 +8,7 @@ package cl.usach.kanbanizesessionbeans;
 
 import cl.usach.elements.BoardElement;
 import cl.usach.elements.ProjectElement;
+import cl.usach.elements.SettingElement;
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
 import cl.usach.entities.Tablero;

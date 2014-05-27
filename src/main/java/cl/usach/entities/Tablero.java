@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tablero.findByNombreTablero", query = "SELECT t FROM Tablero t WHERE t.nombreTablero = :nombreTablero"),
     @NamedQuery(name = "Tablero.findByUrlTablero", query = "SELECT t FROM Tablero t WHERE t.urlTablero = :urlTablero")})
 public class Tablero implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTablero")
+    private List<Miembro> miembroList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -168,6 +170,15 @@ public class Tablero implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.Tablero[ idTablero=" + idTablero + " ]";
+    }
+
+    @XmlTransient
+    public List<Miembro> getMiembroList() {
+        return miembroList;
+    }
+
+    public void setMiembroList(List<Miembro> miembroList) {
+        this.miembroList = miembroList;
     }
     
 }

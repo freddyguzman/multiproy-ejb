@@ -9,6 +9,7 @@ package cl.usach.sessionbeans;
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
 import cl.usach.entities.Tablero;
+import cl.usach.entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -42,5 +43,7 @@ public interface EquipoFacadeLocal {
     Boolean existeEquipoPorTablero(Tablero tablero);
 
     Equipo buscarUnEquipoPoTablero(Tablero tablero);
+
+    List<Equipo> buscarPorUsuario(Usuario usuario);
     
 }

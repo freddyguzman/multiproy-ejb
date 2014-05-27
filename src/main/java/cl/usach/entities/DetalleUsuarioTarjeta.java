@@ -29,7 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DetalleUsuarioTarjeta.findAll", query = "SELECT d FROM DetalleUsuarioTarjeta d"),
-    @NamedQuery(name = "DetalleUsuarioTarjeta.findByIdDetalleUsuarioTarjeta", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idDetalleUsuarioTarjeta = :idDetalleUsuarioTarjeta")})
+    @NamedQuery(name = "DetalleUsuarioTarjeta.findByIdDetalleUsuarioTarjeta", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idDetalleUsuarioTarjeta = :idDetalleUsuarioTarjeta"),
+    @NamedQuery(name = "DetalleUsuarioTarjeta.finByIdTarjetaYIdMiembro", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idTarjeta = :idTarjeta and d.idMiembro = :idMiembro"),
+    @NamedQuery(name = "DetalleUsuarioTarjeta.finByIdTarjeta", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idTarjeta = :idTarjeta" )
+})
 public class DetalleUsuarioTarjeta implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,6 +52,11 @@ public class DetalleUsuarioTarjeta implements Serializable {
 
     public DetalleUsuarioTarjeta(Integer idDetalleUsuarioTarjeta) {
         this.idDetalleUsuarioTarjeta = idDetalleUsuarioTarjeta;
+    }
+
+    public DetalleUsuarioTarjeta(Tarjeta idTarjeta, Miembro idMiembro) {
+        this.idTarjeta = idTarjeta;
+        this.idMiembro = idMiembro;
     }
 
     public Integer getIdDetalleUsuarioTarjeta() {

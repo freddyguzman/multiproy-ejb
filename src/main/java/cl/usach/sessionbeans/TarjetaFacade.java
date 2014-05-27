@@ -6,10 +6,13 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Tablero;
 import cl.usach.entities.Tarjeta;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,34 @@ public class TarjetaFacade extends AbstractFacade<Tarjeta> implements TarjetaFac
 
     public TarjetaFacade() {
         super(Tarjeta.class);
+    }
+
+    @Override
+    public Tarjeta buscarPorIdTarjetaExt(String idTarjetaExt) {
+        Query query;
+        query = em.createNamedQuery("Tarjeta.findByIdTarjetaExt")
+                .setParameter("idTarjetaExt", idTarjetaExt);
+        return (Tarjeta) query.getSingleResult();
+    }
+
+    @Override
+    public Boolean existeTarjetaPorIdTarjetaExt(String idTarjetaExt) {
+        Query query;
+        query = em.createNamedQuery("Tarjeta.findByIdTarjetaExt")
+                .setParameter("idTarjetaExt", idTarjetaExt);
+        if(query.getResultList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public List<Tarjeta> buscarPorTablero(Tablero tablero) {
+        Query query;
+        query = em.createNamedQuery("Tarjeta.findByIdTablero")
+                .setParameter("idTablero", tablero);
+        return query.getResultList();
     }
     
 }

@@ -31,15 +31,15 @@
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
             <version>2.5.1</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>TrelloJava</artifactId>
+            <artifactId>KanbanizeJava</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>KanbanizeJava</artifactId>
+            <artifactId>TrelloJava</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

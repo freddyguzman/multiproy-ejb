@@ -7,6 +7,8 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.DetalleUsuarioTarjeta;
+import cl.usach.entities.Miembro;
+import cl.usach.entities.Tarjeta;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +32,11 @@ public interface DetalleUsuarioTarjetaFacadeLocal {
     List<DetalleUsuarioTarjeta> findRange(int[] range);
 
     int count();
+
+    DetalleUsuarioTarjeta buscarPorIdTarjetaYIdMiembro(Tarjeta idTarjeta, Miembro idMiembro);
+
+    Boolean existeDetallePorIdTarjetaYIdMiembro(Tarjeta idTarjeta, Miembro idMiembro);
+
+    List<DetalleUsuarioTarjeta> buscarPorIdTarjeta(Tarjeta idTarjeta);
     
 }

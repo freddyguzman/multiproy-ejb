@@ -7,9 +7,13 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.DetalleUsuarioTarjeta;
+import cl.usach.entities.Miembro;
+import cl.usach.entities.Tarjeta;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +31,36 @@ public class DetalleUsuarioTarjetaFacade extends AbstractFacade<DetalleUsuarioTa
 
     public DetalleUsuarioTarjetaFacade() {
         super(DetalleUsuarioTarjeta.class);
+    }
+
+    @Override
+    public DetalleUsuarioTarjeta buscarPorIdTarjetaYIdMiembro(Tarjeta idTarjeta, Miembro idMiembro) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.finByIdTarjetaYIdMiembro")
+                .setParameter("idTarjeta", idTarjeta)
+                .setParameter("idMiembro", idMiembro);
+        return (DetalleUsuarioTarjeta) query.getSingleResult();
+    }
+
+    @Override
+    public Boolean existeDetallePorIdTarjetaYIdMiembro(Tarjeta idTarjeta, Miembro idMiembro) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.finByIdTarjetaYIdMiembro")
+                .setParameter("idTarjeta", idTarjeta)
+                .setParameter("idMiembro", idMiembro);
+        if(query.getResultList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public List<DetalleUsuarioTarjeta> buscarPorIdTarjeta(Tarjeta idTarjeta) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.finByIdTarjeta")
+                .setParameter("idTarjeta", idTarjeta);
+        return query.getResultList();
     }
     
 }

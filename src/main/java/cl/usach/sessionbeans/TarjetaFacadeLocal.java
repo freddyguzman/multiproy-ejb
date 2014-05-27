@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Tablero;
 import cl.usach.entities.Tarjeta;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,5 +31,11 @@ public interface TarjetaFacadeLocal {
     List<Tarjeta> findRange(int[] range);
 
     int count();
+
+    Tarjeta buscarPorIdTarjetaExt(String idTarjetaExt);
+
+    Boolean existeTarjetaPorIdTarjetaExt(String idTarjetaExt);
+
+    List<Tarjeta> buscarPorTablero(Tablero tablero);
     
 }

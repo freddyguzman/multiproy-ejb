@@ -38,8 +38,19 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Lista.findByIdLista", query = "SELECT l FROM Lista l WHERE l.idLista = :idLista"),
     @NamedQuery(name = "Lista.findByIdListaExt", query = "SELECT l FROM Lista l WHERE l.idListaExt = :idListaExt"),
     @NamedQuery(name = "Lista.findByNombreLista", query = "SELECT l FROM Lista l WHERE l.nombreLista = :nombreLista"),
-    @NamedQuery(name = "Lista.findByPosicion", query = "SELECT l FROM Lista l WHERE l.posicion = :posicion")})
+    @NamedQuery(name = "Lista.findByPosicion", query = "SELECT l FROM Lista l WHERE l.posicion = :posicion"),
+    @NamedQuery(name = "Lista.findByIdTablero", query = "SELECT l FROM Lista l WHERE l.idTablero = :idTablero")
+})
 public class Lista implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "POSICION")
+    private int posicion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "ID_LISTA_EXT")
+    private String idListaExt;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,18 +59,9 @@ public class Lista implements Serializable {
     private Integer idLista;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_LISTA_EXT")
-    private int idListaExt;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "NOMBRE_LISTA")
     private String nombreLista;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "POSICION")
-    private String posicion;
     @JoinColumn(name = "ID_TABLERO", referencedColumnName = "ID_TABLERO")
     @ManyToOne(optional = false)
     private Tablero idTablero;
@@ -73,11 +75,18 @@ public class Lista implements Serializable {
         this.idLista = idLista;
     }
 
-    public Lista(Integer idLista, int idListaExt, String nombreLista, String posicion) {
+    public Lista(Integer idLista, String idListaExt, String nombreLista, int posicion) {
         this.idLista = idLista;
         this.idListaExt = idListaExt;
         this.nombreLista = nombreLista;
         this.posicion = posicion;
+    }
+
+    public Lista(String idListaExt, String nombreLista, int posicion, Tablero idTablero) {
+        this.idListaExt = idListaExt;
+        this.nombreLista = nombreLista;
+        this.posicion = posicion;
+        this.idTablero = idTablero;
     }
 
     public Integer getIdLista() {
@@ -88,11 +97,11 @@ public class Lista implements Serializable {
         this.idLista = idLista;
     }
 
-    public int getIdListaExt() {
+    public String getIdListaExt() {
         return idListaExt;
     }
 
-    public void setIdListaExt(int idListaExt) {
+    public void setIdListaExt(String idListaExt) {
         this.idListaExt = idListaExt;
     }
 
@@ -104,13 +113,6 @@ public class Lista implements Serializable {
         this.nombreLista = nombreLista;
     }
 
-    public String getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(String posicion) {
-        this.posicion = posicion;
-    }
 
     public Tablero getIdTablero() {
         return idTablero;
@@ -152,6 +154,14 @@ public class Lista implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.Lista[ idLista=" + idLista + " ]";
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
     
 }

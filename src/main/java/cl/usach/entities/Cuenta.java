@@ -44,6 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cuenta.findByUsuario", query = "SELECT c FROM Cuenta c WHERE c.idUsuario = :idUsuario")
 })
 public class Cuenta implements Serializable {
+    @OneToMany(mappedBy = "idCuenta")
+    private List<Miembro> miembroList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -199,6 +201,15 @@ public class Cuenta implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.Cuenta[ idCuenta=" + idCuenta + " ]";
+    }
+
+    @XmlTransient
+    public List<Miembro> getMiembroList() {
+        return miembroList;
+    }
+
+    public void setMiembroList(List<Miembro> miembroList) {
+        this.miembroList = miembroList;
     }
     
 }

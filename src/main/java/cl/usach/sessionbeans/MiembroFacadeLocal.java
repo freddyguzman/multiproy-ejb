@@ -7,6 +7,7 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Miembro;
+import cl.usach.entities.Tablero;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +31,15 @@ public interface MiembroFacadeLocal {
     List<Miembro> findRange(int[] range);
 
     int count();
+
+    Miembro buscarPorIdMiembroExt(String idMiembroExt);
+
+    Boolean existeMiembroPorIdMiembroExt(String idMiembroExt);
+
+    List<Miembro> buscarPorTablero(Tablero tablero);
+
+    Miembro buscarMiembroPorIdTableroYIdMiembroExt(Tablero tablero, String idMiembroExt);
+
+    Boolean existeMiembroPorIdTableroYIdMiembroExt(Tablero tablero, String idMiembroExt);
     
 }

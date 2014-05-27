@@ -41,18 +41,21 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tarjeta.findByIdTarjeta", query = "SELECT t FROM Tarjeta t WHERE t.idTarjeta = :idTarjeta"),
     @NamedQuery(name = "Tarjeta.findByIdTarjetaExt", query = "SELECT t FROM Tarjeta t WHERE t.idTarjetaExt = :idTarjetaExt"),
     @NamedQuery(name = "Tarjeta.findByNombreTarjeta", query = "SELECT t FROM Tarjeta t WHERE t.nombreTarjeta = :nombreTarjeta"),
-    @NamedQuery(name = "Tarjeta.findByFechaLimiteTarjeta", query = "SELECT t FROM Tarjeta t WHERE t.fechaLimiteTarjeta = :fechaLimiteTarjeta")})
+    @NamedQuery(name = "Tarjeta.findByFechaLimiteTarjeta", query = "SELECT t FROM Tarjeta t WHERE t.fechaLimiteTarjeta = :fechaLimiteTarjeta"),
+    @NamedQuery(name = "Tarjeta.findByIdTablero", query = "SELECT t FROM Tarjeta t WHERE t.idTablero = :idTablero")
+})
 public class Tarjeta implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "ID_TARJETA_EXT")
+    private String idTarjetaExt;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID_TARJETA")
     private Integer idTarjeta;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_TARJETA_EXT")
-    private int idTarjetaExt;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -79,10 +82,18 @@ public class Tarjeta implements Serializable {
         this.idTarjeta = idTarjeta;
     }
 
-    public Tarjeta(Integer idTarjeta, int idTarjetaExt, String nombreTarjeta) {
+    public Tarjeta(Integer idTarjeta, String idTarjetaExt, String nombreTarjeta) {
         this.idTarjeta = idTarjeta;
         this.idTarjetaExt = idTarjetaExt;
         this.nombreTarjeta = nombreTarjeta;
+    }
+
+    public Tarjeta(String idTarjetaExt, String nombreTarjeta, Date fechaLimiteTarjeta, Lista idLista, Tablero idTablero) {
+        this.idTarjetaExt = idTarjetaExt;
+        this.nombreTarjeta = nombreTarjeta;
+        this.fechaLimiteTarjeta = fechaLimiteTarjeta;
+        this.idLista = idLista;
+        this.idTablero = idTablero;
     }
 
     public Integer getIdTarjeta() {
@@ -93,11 +104,11 @@ public class Tarjeta implements Serializable {
         this.idTarjeta = idTarjeta;
     }
 
-    public int getIdTarjetaExt() {
+    public String getIdTarjetaExt() {
         return idTarjetaExt;
     }
 
-    public void setIdTarjetaExt(int idTarjetaExt) {
+    public void setIdTarjetaExt(String idTarjetaExt) {
         this.idTarjetaExt = idTarjetaExt;
     }
 
@@ -175,5 +186,5 @@ public class Tarjeta implements Serializable {
     public String toString() {
         return "cl.usach.entities.Tarjeta[ idTarjeta=" + idTarjeta + " ]";
     }
-    
+
 }

@@ -39,16 +39,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actividad.findByFechaActividad", query = "SELECT a FROM Actividad a WHERE a.fechaActividad = :fechaActividad"),
     @NamedQuery(name = "Actividad.findByTipoActividad", query = "SELECT a FROM Actividad a WHERE a.tipoActividad = :tipoActividad")})
 public class Actividad implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "ID_ACTIVIDAD_EXT")
+    private String idActividadExt;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID_ACTIVIDAD")
     private Integer idActividad;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_ACTIVIDAD_EXT")
-    private int idActividadExt;
     @Basic(optional = false)
     @NotNull
     @Column(name = "FECHA_ACTIVIDAD")
@@ -76,7 +77,7 @@ public class Actividad implements Serializable {
         this.idActividad = idActividad;
     }
 
-    public Actividad(Integer idActividad, int idActividadExt, Date fechaActividad, String tipoActividad) {
+    public Actividad(Integer idActividad, String idActividadExt, Date fechaActividad, String tipoActividad) {
         this.idActividad = idActividad;
         this.idActividadExt = idActividadExt;
         this.fechaActividad = fechaActividad;
@@ -91,11 +92,11 @@ public class Actividad implements Serializable {
         this.idActividad = idActividad;
     }
 
-    public int getIdActividadExt() {
+    public String getIdActividadExt() {
         return idActividadExt;
     }
 
-    public void setIdActividadExt(int idActividadExt) {
+    public void setIdActividadExt(String idActividadExt) {
         this.idActividadExt = idActividadExt;
     }
 

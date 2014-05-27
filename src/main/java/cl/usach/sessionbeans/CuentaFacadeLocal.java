@@ -35,5 +35,9 @@ public interface CuentaFacadeLocal {
     Cuenta buscarPorId(int idCuenta);
 
     List<Cuenta> buscarPorUsuario(Usuario usuario);
+
+    Boolean existeCuentaPorUsuarioCuenta(String usuarioCuenta);
+
+    Cuenta buscarPorNombreUsuarioCuenta(String nombreUsuarioCuenta);
     
 }

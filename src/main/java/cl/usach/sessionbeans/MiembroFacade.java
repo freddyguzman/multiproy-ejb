@@ -7,9 +7,12 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Miembro;
+import cl.usach.entities.Tablero;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,56 @@ public class MiembroFacade extends AbstractFacade<Miembro> implements MiembroFac
 
     public MiembroFacade() {
         super(Miembro.class);
+    }
+
+    @Override
+    public Miembro buscarPorIdMiembroExt(String idMiembroExt) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByIdMiembroExt")
+                .setParameter("idMiembroExt", idMiembroExt);
+        return (Miembro) query.getSingleResult();
+    }
+
+    @Override
+    public Boolean existeMiembroPorIdMiembroExt(String idMiembroExt) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByIdMiembroExt")
+                .setParameter("idMiembroExt", idMiembroExt);
+        if(query.getResultList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public List<Miembro> buscarPorTablero(Tablero tablero) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByidTablero")
+                .setParameter("idTablero", tablero);
+        return query.getResultList();
+    }
+
+    @Override
+    public Miembro buscarMiembroPorIdTableroYIdMiembroExt(Tablero tablero, String idMiembroExt) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByidTableroYIdMiembroExt")
+                .setParameter("idTablero", tablero)
+                .setParameter("idMiembroExt", idMiembroExt);
+        return (Miembro) query.getSingleResult();
+    }   
+
+    @Override
+    public Boolean existeMiembroPorIdTableroYIdMiembroExt(Tablero tablero, String idMiembroExt) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByidTableroYIdMiembroExt")
+                .setParameter("idTablero", tablero)
+                .setParameter("idMiembroExt", idMiembroExt);
+        if(query.getResultList().isEmpty()){
+            return false;
+        }else{
+            return true;
+        }
     }
     
 }

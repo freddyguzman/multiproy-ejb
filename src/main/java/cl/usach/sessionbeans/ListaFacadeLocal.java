@@ -7,6 +7,7 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Lista;
+import cl.usach.entities.Tablero;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,5 +31,11 @@ public interface ListaFacadeLocal {
     List<Lista> findRange(int[] range);
 
     int count();
+
+    Lista buscarPorIdExt(String idListaExt);
+
+    Boolean existePorIdExt(String idListaExt);
+
+    List<Lista> buscarPorTablero(Tablero tablero);
     
 }
