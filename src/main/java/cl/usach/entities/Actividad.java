@@ -36,14 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actividad.findAll", query = "SELECT a FROM Actividad a"),
     @NamedQuery(name = "Actividad.findByIdActividad", query = "SELECT a FROM Actividad a WHERE a.idActividad = :idActividad"),
     @NamedQuery(name = "Actividad.findByIdActividadExt", query = "SELECT a FROM Actividad a WHERE a.idActividadExt = :idActividadExt"),
-    @NamedQuery(name = "Actividad.findByFechaActividad", query = "SELECT a FROM Actividad a WHERE a.fechaActividad = :fechaActividad"),
-    @NamedQuery(name = "Actividad.findByTipoActividad", query = "SELECT a FROM Actividad a WHERE a.tipoActividad = :tipoActividad")})
+    @NamedQuery(name = "Actividad.findByFechaActividad", query = "SELECT a FROM Actividad a WHERE a.fechaActividad = :fechaActividad")})
 public class Actividad implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "ID_ACTIVIDAD_EXT")
-    private String idActividadExt;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,19 +46,19 @@ public class Actividad implements Serializable {
     private Integer idActividad;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "ID_ACTIVIDAD_EXT")
+    private String idActividadExt;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "FECHA_ACTIVIDAD")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaActividad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "TIPO_ACTIVIDAD")
-    private String tipoActividad;
     @JoinColumn(name = "ID_MIEMBRO", referencedColumnName = "ID_MIEMBRO")
     @ManyToOne(optional = false)
     private Miembro idMiembro;
     @JoinColumn(name = "ID_TARJETA", referencedColumnName = "ID_TARJETA")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Tarjeta idTarjeta;
     @JoinColumn(name = "ID_TIPO_ACTIVIDAD", referencedColumnName = "ID_TIPO_ACTIVIDAD")
     @ManyToOne(optional = false)
@@ -77,11 +71,16 @@ public class Actividad implements Serializable {
         this.idActividad = idActividad;
     }
 
-    public Actividad(Integer idActividad, String idActividadExt, Date fechaActividad, String tipoActividad) {
+    public Actividad(Integer idActividad, String idActividadExt, Date fechaActividad) {
         this.idActividad = idActividad;
         this.idActividadExt = idActividadExt;
         this.fechaActividad = fechaActividad;
-        this.tipoActividad = tipoActividad;
+    }
+    
+    public Actividad(String idActividadExt, Date fechaActividad, TipoActividad idTipoActividad) {
+        this.idActividadExt = idActividadExt;
+        this.fechaActividad = fechaActividad;
+        this.idTipoActividad = idTipoActividad;
     }
 
     public Integer getIdActividad() {
@@ -106,14 +105,6 @@ public class Actividad implements Serializable {
 
     public void setFechaActividad(Date fechaActividad) {
         this.fechaActividad = fechaActividad;
-    }
-
-    public String getTipoActividad() {
-        return tipoActividad;
-    }
-
-    public void setTipoActividad(String tipoActividad) {
-        this.tipoActividad = tipoActividad;
     }
 
     public Miembro getIdMiembro() {

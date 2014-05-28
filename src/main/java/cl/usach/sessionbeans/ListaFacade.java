@@ -8,6 +8,7 @@ package cl.usach.sessionbeans;
 
 import cl.usach.entities.Lista;
 import cl.usach.entities.Tablero;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -58,6 +59,35 @@ public class ListaFacade extends AbstractFacade<Lista> implements ListaFacadeLoc
         query = em.createNamedQuery("Lista.findByIdTablero")
                 .setParameter("idTablero", tablero);
         return query.getResultList();
+    }
+
+    @Override
+    public Lista buscarUltimaPorTablero(Tablero idTablero) {
+        Query query;
+        query = em.createNamedQuery("Lista.findByIdTableroPorPos")
+                .setParameter("idTablero", idTablero);
+        if(!query.getResultList().isEmpty()){
+            return (Lista) query.getResultList().get(query.getResultList().size() - 1);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Lista> buscarPrimeraYUltimaPorTablero(Tablero idTablero) {
+        List<Lista> aux = new ArrayList<>();
+        Query query;
+        query = em.createNamedQuery("Lista.findByIdTableroPorPos")
+                .setParameter("idTablero", idTablero);
+        if(!query.getResultList().isEmpty()){
+            aux.add((Lista) query.getResultList().get(0));
+            
+            if(query.getResultList().size() > 1){
+                aux.add((Lista) query.getResultList().get(query.getResultList().size() - 1));
+            }else{
+                aux.add(null);
+            }
+        }
+        return aux;
     }
     
 }

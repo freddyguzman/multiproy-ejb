@@ -37,5 +37,13 @@ public class TipoCuentaFacade extends AbstractFacade<TipoCuenta> implements Tipo
                 .setParameter("idTipoCuenta", idTipoCuenta);
         return (TipoCuenta) query.getSingleResult();
     }
+
+    @Override
+    public TipoCuenta buscarPorNombreTipoCuenta(String nombreTipoCuenta) {
+        Query query;
+        query = em.createNamedQuery("TipoCuenta.findByNombreTipoCuenta")
+                .setParameter("nombreTipoCuenta", nombreTipoCuenta);
+        return (TipoCuenta) query.getSingleResult();
+    }
     
 }

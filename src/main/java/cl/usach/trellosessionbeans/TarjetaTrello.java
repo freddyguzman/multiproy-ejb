@@ -9,12 +9,14 @@ package cl.usach.trellosessionbeans;
 import cl.usach.elements.CardElement;
 import cl.usach.entities.DetalleUsuarioTarjeta;
 import cl.usach.entities.Equipo;
+import cl.usach.entities.EstadoTarjeta;
 import cl.usach.entities.Lista;
 import cl.usach.entities.Miembro;
 import cl.usach.entities.Tarjeta;
 import cl.usach.gettrello.Trello;
 import cl.usach.gettrello.TrelloMake;
 import cl.usach.sessionbeans.DetalleUsuarioTarjetaFacadeLocal;
+import cl.usach.sessionbeans.EstadoTarjetaFacadeLocal;
 import cl.usach.sessionbeans.ListaFacade;
 import cl.usach.sessionbeans.ListaFacadeLocal;
 import cl.usach.sessionbeans.MiembroFacadeLocal;
@@ -40,6 +42,8 @@ import org.json.JSONObject;
  */
 @Stateless
 public class TarjetaTrello implements TarjetaTrelloLocal {
+    @EJB
+    private EstadoTarjetaFacadeLocal estadoTarjetaFacade;
     @EJB
     private DetalleUsuarioTarjetaFacadeLocal detalleUsuarioTarjetaFacade;
     @EJB
@@ -111,7 +115,8 @@ public class TarjetaTrello implements TarjetaTrelloLocal {
                 }else{
                     //Agregar Tarjeta
                     Lista lista = listaFacade.buscarPorIdExt(cardElement.getIdList());
-                    Tarjeta tarjeta = new Tarjeta(cardElement.getId(), cardElement.getName()
+                    EstadoTarjeta estadoTarjeta = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("Agregada");
+                    Tarjeta tarjeta = new Tarjeta(estadoTarjeta, cardElement.getId(), cardElement.getName()
                             , dateDue, lista, equipo.getIdTablero());
                     tarjetaFacade.create(tarjeta);
                     

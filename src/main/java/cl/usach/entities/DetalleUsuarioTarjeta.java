@@ -31,7 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DetalleUsuarioTarjeta.findAll", query = "SELECT d FROM DetalleUsuarioTarjeta d"),
     @NamedQuery(name = "DetalleUsuarioTarjeta.findByIdDetalleUsuarioTarjeta", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idDetalleUsuarioTarjeta = :idDetalleUsuarioTarjeta"),
     @NamedQuery(name = "DetalleUsuarioTarjeta.finByIdTarjetaYIdMiembro", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idTarjeta = :idTarjeta and d.idMiembro = :idMiembro"),
-    @NamedQuery(name = "DetalleUsuarioTarjeta.finByIdTarjeta", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idTarjeta = :idTarjeta" )
+    @NamedQuery(name = "DetalleUsuarioTarjeta.finByIdTarjeta", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idTarjeta = :idTarjeta" ),
+    @NamedQuery(name = "DetalleUsuarioTarjeta.findByIdMiembro", query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idMiembro = :idMiembro"),
+    @NamedQuery(name = "DetalleUsuarioTarjeta.findByIdMiembroYIdTablero", 
+            query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idMiembro = :idMiembro and d.idMiembro.idTablero = :idTablero"),
+    @NamedQuery(name = "DetalleUsuarioTarjeta.findByIdMiembroYIdTableroYNoLista", 
+            query = "SELECT d FROM DetalleUsuarioTarjeta d WHERE d.idMiembro = :idMiembro and d.idMiembro.idTablero = :idTablero and d.idTarjeta.idLista != :idLista")
 })
 public class DetalleUsuarioTarjeta implements Serializable {
     private static final long serialVersionUID = 1L;

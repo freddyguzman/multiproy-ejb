@@ -7,7 +7,9 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.DetalleUsuarioTarjeta;
+import cl.usach.entities.Lista;
 import cl.usach.entities.Miembro;
+import cl.usach.entities.Tablero;
 import cl.usach.entities.Tarjeta;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -60,6 +62,33 @@ public class DetalleUsuarioTarjetaFacade extends AbstractFacade<DetalleUsuarioTa
         Query query;
         query = em.createNamedQuery("DetalleUsuarioTarjeta.finByIdTarjeta")
                 .setParameter("idTarjeta", idTarjeta);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<DetalleUsuarioTarjeta> buscarPorIdMiembro(Miembro idMiembro) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.findByIdMiembro")
+                .setParameter("idMiembro", idMiembro);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<DetalleUsuarioTarjeta> buscarPorIdMiembroYIdTablero(Miembro idMiembro, Tablero idTablero) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.findByIdMiembroYIdTablero")
+                .setParameter("idMiembro", idMiembro)
+                .setParameter("idTablero", idTablero);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<DetalleUsuarioTarjeta> buscarPorIdMiembroYIdTableroYNoLista(Miembro idMiembro, Tablero idTablero, Lista idLista) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.findByIdMiembroYIdTableroYNoLista")
+                .setParameter("idMiembro", idMiembro)
+                .setParameter("idTablero", idTablero)
+                .setParameter("idLista", idLista);
         return query.getResultList();
     }
     

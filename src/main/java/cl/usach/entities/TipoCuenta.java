@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TipoCuenta.findByIdTipoCuenta", query = "SELECT t FROM TipoCuenta t WHERE t.idTipoCuenta = :idTipoCuenta"),
     @NamedQuery(name = "TipoCuenta.findByNombreTipoCuenta", query = "SELECT t FROM TipoCuenta t WHERE t.nombreTipoCuenta = :nombreTipoCuenta")})
 public class TipoCuenta implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoCuenta")
+    private List<TipoActividad> tipoActividadList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,6 +112,15 @@ public class TipoCuenta implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.TipoCuenta[ idTipoCuenta=" + idTipoCuenta + " ]";
+    }
+
+    @XmlTransient
+    public List<TipoActividad> getTipoActividadList() {
+        return tipoActividadList;
+    }
+
+    public void setTipoActividadList(List<TipoActividad> tipoActividadList) {
+        this.tipoActividadList = tipoActividadList;
     }
     
 }

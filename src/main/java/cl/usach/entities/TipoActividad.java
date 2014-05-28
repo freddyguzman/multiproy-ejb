@@ -7,20 +7,20 @@
 package cl.usach.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,21 +32,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "TipoActividad.findAll", query = "SELECT t FROM TipoActividad t"),
     @NamedQuery(name = "TipoActividad.findByIdTipoActividad", query = "SELECT t FROM TipoActividad t WHERE t.idTipoActividad = :idTipoActividad"),
-    @NamedQuery(name = "TipoActividad.findByNombreTipoActividad", query = "SELECT t FROM TipoActividad t WHERE t.nombreTipoActividad = :nombreTipoActividad")})
+    @NamedQuery(name = "TipoActividad.findByNombreTipoActividad", query = "SELECT t FROM TipoActividad t WHERE t.nombreTipoActividad = :nombreTipoActividad")
+})
 public class TipoActividad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ID_TIPO_ACTIVIDAD")
     private Integer idTipoActividad;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 50)
     @Column(name = "NOMBRE_TIPO_ACTIVIDAD")
     private String nombreTipoActividad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoActividad")
-    private List<Actividad> actividadList;
+    @JoinColumn(name = "ID_TIPO_CUENTA", referencedColumnName = "ID_TIPO_CUENTA")
+    @ManyToOne(optional = false)
+    private TipoCuenta idTipoCuenta;
 
     public TipoActividad() {
     }
@@ -58,6 +60,11 @@ public class TipoActividad implements Serializable {
     public TipoActividad(Integer idTipoActividad, String nombreTipoActividad) {
         this.idTipoActividad = idTipoActividad;
         this.nombreTipoActividad = nombreTipoActividad;
+    }
+
+    public TipoActividad(String nombreTipoActividad, TipoCuenta idTipoCuenta) {
+        this.nombreTipoActividad = nombreTipoActividad;
+        this.idTipoCuenta = idTipoCuenta;
     }
 
     public Integer getIdTipoActividad() {
@@ -76,13 +83,12 @@ public class TipoActividad implements Serializable {
         this.nombreTipoActividad = nombreTipoActividad;
     }
 
-    @XmlTransient
-    public List<Actividad> getActividadList() {
-        return actividadList;
+    public TipoCuenta getIdTipoCuenta() {
+        return idTipoCuenta;
     }
 
-    public void setActividadList(List<Actividad> actividadList) {
-        this.actividadList = actividadList;
+    public void setIdTipoCuenta(TipoCuenta idTipoCuenta) {
+        this.idTipoCuenta = idTipoCuenta;
     }
 
     @Override

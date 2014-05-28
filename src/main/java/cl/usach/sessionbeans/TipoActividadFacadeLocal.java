@@ -30,5 +30,9 @@ public interface TipoActividadFacadeLocal {
     List<TipoActividad> findRange(int[] range);
 
     int count();
+
+    TipoActividad buscarPorNombre(String nombreTipoActividad);
+
+    Boolean existeActividadPorNombre(String nombreTipoActividad);
     
 }

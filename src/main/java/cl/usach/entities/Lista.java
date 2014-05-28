@@ -39,7 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Lista.findByIdListaExt", query = "SELECT l FROM Lista l WHERE l.idListaExt = :idListaExt"),
     @NamedQuery(name = "Lista.findByNombreLista", query = "SELECT l FROM Lista l WHERE l.nombreLista = :nombreLista"),
     @NamedQuery(name = "Lista.findByPosicion", query = "SELECT l FROM Lista l WHERE l.posicion = :posicion"),
-    @NamedQuery(name = "Lista.findByIdTablero", query = "SELECT l FROM Lista l WHERE l.idTablero = :idTablero")
+    @NamedQuery(name = "Lista.findByIdTablero", query = "SELECT l FROM Lista l WHERE l.idTablero = :idTablero"),
+    @NamedQuery(name = "Lista.findByIdTableroPorPos", query = "SELECT l FROM Lista l WHERE l.idTablero = :idTablero ORDER BY l.posicion"),
+    @NamedQuery(name = "Lista.findByIdTableroYPrimera", query = "SELECT l FROM Lista l WHERE l.idTablero = :idTablero AND l.posicion = 1")
 })
 public class Lista implements Serializable {
     @Basic(optional = false)

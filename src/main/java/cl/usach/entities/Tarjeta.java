@@ -45,6 +45,15 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tarjeta.findByIdTablero", query = "SELECT t FROM Tarjeta t WHERE t.idTablero = :idTablero")
 })
 public class Tarjeta implements Serializable {
+    @JoinColumn(name = "ID_ESTADO_TARJETA", referencedColumnName = "ID_ESTADO_TARJETA")
+    @ManyToOne(optional = false)
+    private EstadoTarjeta idEstadoTarjeta;
+    @Column(name = "FECHA_INICIO_TARJETA")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaInicioTarjeta;
+    @Column(name = "FECHA_FINAL_TARJETA")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaFinalTarjeta;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -89,6 +98,15 @@ public class Tarjeta implements Serializable {
     }
 
     public Tarjeta(String idTarjetaExt, String nombreTarjeta, Date fechaLimiteTarjeta, Lista idLista, Tablero idTablero) {
+        this.idTarjetaExt = idTarjetaExt;
+        this.nombreTarjeta = nombreTarjeta;
+        this.fechaLimiteTarjeta = fechaLimiteTarjeta;
+        this.idLista = idLista;
+        this.idTablero = idTablero;
+    }
+
+    public Tarjeta(EstadoTarjeta idEstadoTarjeta, String idTarjetaExt, String nombreTarjeta, Date fechaLimiteTarjeta, Lista idLista, Tablero idTablero) {
+        this.idEstadoTarjeta = idEstadoTarjeta;
         this.idTarjetaExt = idTarjetaExt;
         this.nombreTarjeta = nombreTarjeta;
         this.fechaLimiteTarjeta = fechaLimiteTarjeta;
@@ -185,6 +203,30 @@ public class Tarjeta implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.Tarjeta[ idTarjeta=" + idTarjeta + " ]";
+    }
+
+    public Date getFechaInicioTarjeta() {
+        return fechaInicioTarjeta;
+    }
+
+    public void setFechaInicioTarjeta(Date fechaInicioTarjeta) {
+        this.fechaInicioTarjeta = fechaInicioTarjeta;
+    }
+
+    public Date getFechaFinalTarjeta() {
+        return fechaFinalTarjeta;
+    }
+
+    public void setFechaFinalTarjeta(Date fechaFinalTarjeta) {
+        this.fechaFinalTarjeta = fechaFinalTarjeta;
+    }
+
+    public EstadoTarjeta getIdEstadoTarjeta() {
+        return idEstadoTarjeta;
+    }
+
+    public void setIdEstadoTarjeta(EstadoTarjeta idEstadoTarjeta) {
+        this.idEstadoTarjeta = idEstadoTarjeta;
     }
 
 }

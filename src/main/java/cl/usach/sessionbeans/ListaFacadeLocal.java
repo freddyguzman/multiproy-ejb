@@ -37,5 +37,9 @@ public interface ListaFacadeLocal {
     Boolean existePorIdExt(String idListaExt);
 
     List<Lista> buscarPorTablero(Tablero tablero);
+
+    Lista buscarUltimaPorTablero(Tablero idTablero);
+
+    List<Lista> buscarPrimeraYUltimaPorTablero(Tablero idTablero);
     
 }

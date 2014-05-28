@@ -32,5 +32,7 @@ public interface TipoCuentaFacadeLocal {
     int count();
     
     public TipoCuenta buscarPorId(int idTipoCuenta);
+
+    TipoCuenta buscarPorNombreTipoCuenta(String nombreTipoCuenta);
     
 }

@@ -7,7 +7,9 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.DetalleUsuarioTarjeta;
+import cl.usach.entities.Lista;
 import cl.usach.entities.Miembro;
+import cl.usach.entities.Tablero;
 import cl.usach.entities.Tarjeta;
 import java.util.List;
 import javax.ejb.Local;
@@ -38,5 +40,11 @@ public interface DetalleUsuarioTarjetaFacadeLocal {
     Boolean existeDetallePorIdTarjetaYIdMiembro(Tarjeta idTarjeta, Miembro idMiembro);
 
     List<DetalleUsuarioTarjeta> buscarPorIdTarjeta(Tarjeta idTarjeta);
+
+    List<DetalleUsuarioTarjeta> buscarPorIdMiembro(Miembro idMiembro);
+
+    List<DetalleUsuarioTarjeta> buscarPorIdMiembroYIdTablero(Miembro idMiembro, Tablero idTablero);
+
+    List<DetalleUsuarioTarjeta> buscarPorIdMiembroYIdTableroYNoLista(Miembro idMiembro, Tablero idTablero, Lista idLista);
     
 }
