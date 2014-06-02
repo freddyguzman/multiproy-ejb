@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Asignatura;
 import cl.usach.entities.SprintAsignatura;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,5 +31,7 @@ public interface SprintAsignaturaFacadeLocal {
     List<SprintAsignatura> findRange(int[] range);
 
     int count();
+
+    List<SprintAsignatura> buscarPorAsignatura(Asignatura idAsignatura);
     
 }

@@ -6,11 +6,14 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Asignatura;
 import cl.usach.entities.SprintAsignatura;
 import cl.usach.kanbanizesessionbeans.AbstractFacade;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,6 +31,14 @@ public class SprintAsignaturaFacade extends AbstractFacade<SprintAsignatura> imp
 
     public SprintAsignaturaFacade() {
         super(SprintAsignatura.class);
+    }
+
+    @Override
+    public List<SprintAsignatura> buscarPorAsignatura(Asignatura idAsignatura) {
+        Query query;
+        query = em.createNamedQuery("SprintAsignatura.findByAsignatura")
+                .setParameter("idAsignatura", idAsignatura);
+        return query.getResultList();
     }
     
 }

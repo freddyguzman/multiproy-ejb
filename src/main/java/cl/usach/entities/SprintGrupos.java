@@ -37,7 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SprintGrupos.findByIdSprintGrupo", query = "SELECT s FROM SprintGrupos s WHERE s.idSprintGrupo = :idSprintGrupo"),
     @NamedQuery(name = "SprintGrupos.findByNombreSprintGrupo", query = "SELECT s FROM SprintGrupos s WHERE s.nombreSprintGrupo = :nombreSprintGrupo"),
     @NamedQuery(name = "SprintGrupos.findByObjetivoTecnicoSprintGrupo", query = "SELECT s FROM SprintGrupos s WHERE s.objetivoTecnicoSprintGrupo = :objetivoTecnicoSprintGrupo"),
-    @NamedQuery(name = "SprintGrupos.findByObjetivoUsuarioSprintGrupo", query = "SELECT s FROM SprintGrupos s WHERE s.objetivoUsuarioSprintGrupo = :objetivoUsuarioSprintGrupo")})
+    @NamedQuery(name = "SprintGrupos.findByObjetivoUsuarioSprintGrupo", query = "SELECT s FROM SprintGrupos s WHERE s.objetivoUsuarioSprintGrupo = :objetivoUsuarioSprintGrupo"),
+    @NamedQuery(name = "SprintGrupos.findBySprintAsigntura" , query = "SELECT s FROM SprintGrupos s WHERE s.idSprintAsignatura = :idSprintAsignatura")
+})
 public class SprintGrupos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,9 +63,9 @@ public class SprintGrupos implements Serializable {
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
-    @JoinColumn(name = "ID_SPRINT_ASIGNATIRA", referencedColumnName = "ID_SPRINT_ASIGNATIRA")
+    @JoinColumn(name = "ID_SPRINT_ASIGNATURA", referencedColumnName = "ID_SPRINT_ASIGNATURA")
     @ManyToOne(optional = false)
-    private SprintAsignatura idSprintAsignatira;
+    private SprintAsignatura idSprintAsignatura;
 
     public SprintGrupos() {
     }
@@ -76,6 +78,16 @@ public class SprintGrupos implements Serializable {
         this.idSprintGrupo = idSprintGrupo;
         this.nombreSprintGrupo = nombreSprintGrupo;
     }
+
+    public SprintGrupos(String nombreSprintGrupo, String objetivoTecnicoSprintGrupo, String objetivoUsuarioSprintGrupo, Usuario idUsuario, SprintAsignatura idSprintAsignatura) {
+        this.nombreSprintGrupo = nombreSprintGrupo;
+        this.objetivoTecnicoSprintGrupo = objetivoTecnicoSprintGrupo;
+        this.objetivoUsuarioSprintGrupo = objetivoUsuarioSprintGrupo;
+        this.idUsuario = idUsuario;
+        this.idSprintAsignatura = idSprintAsignatura;
+    }
+
+    
 
     public Integer getIdSprintGrupo() {
         return idSprintGrupo;
@@ -126,12 +138,12 @@ public class SprintGrupos implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public SprintAsignatura getIdSprintAsignatira() {
-        return idSprintAsignatira;
+    public SprintAsignatura getIdSprintAsignatura() {
+        return idSprintAsignatura;
     }
 
-    public void setIdSprintAsignatira(SprintAsignatura idSprintAsignatira) {
-        this.idSprintAsignatira = idSprintAsignatira;
+    public void setIdSprintAsignatura(SprintAsignatura idSprintAsignatura) {
+        this.idSprintAsignatura = idSprintAsignatura;
     }
 
     @Override

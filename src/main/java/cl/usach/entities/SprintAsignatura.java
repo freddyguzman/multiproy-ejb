@@ -38,18 +38,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SprintAsignatura.findAll", query = "SELECT s FROM SprintAsignatura s"),
-    @NamedQuery(name = "SprintAsignatura.findByIdSprintAsignatira", query = "SELECT s FROM SprintAsignatura s WHERE s.idSprintAsignatira = :idSprintAsignatira"),
+    @NamedQuery(name = "SprintAsignatura.findByIdSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.idSprintAsignatura = :idSprintAsignatura"),
     @NamedQuery(name = "SprintAsignatura.findByNombreSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.nombreSprintAsignatura = :nombreSprintAsignatura"),
     @NamedQuery(name = "SprintAsignatura.findByDescripcionSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.descripcionSprintAsignatura = :descripcionSprintAsignatura"),
     @NamedQuery(name = "SprintAsignatura.findByFechaInicioSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.fechaInicioSprintAsignatura = :fechaInicioSprintAsignatura"),
-    @NamedQuery(name = "SprintAsignatura.findByFechaTerminoSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.fechaTerminoSprintAsignatura = :fechaTerminoSprintAsignatura")})
+    @NamedQuery(name = "SprintAsignatura.findByFechaTerminoSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.fechaTerminoSprintAsignatura = :fechaTerminoSprintAsignatura"),
+    @NamedQuery(name = "SprintAsignatura.findByAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.idAsignatura = :idAsignatura")
+})
 public class SprintAsignatura implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_SPRINT_ASIGNATIRA")
-    private Integer idSprintAsignatira;
+    @Column(name = "ID_SPRINT_ASIGNATURA")
+    private Integer idSprintAsignatura;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -71,29 +73,37 @@ public class SprintAsignatura implements Serializable {
     @JoinColumn(name = "ID_ASIGNATURA", referencedColumnName = "ID_ASIGNATURA")
     @ManyToOne(optional = false)
     private Asignatura idAsignatura;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSprintAsignatira")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSprintAsignatura")
     private List<SprintGrupos> sprintGruposList;
 
     public SprintAsignatura() {
     }
 
-    public SprintAsignatura(Integer idSprintAsignatira) {
-        this.idSprintAsignatira = idSprintAsignatira;
+    public SprintAsignatura(Integer idSprintAsignatura) {
+        this.idSprintAsignatura = idSprintAsignatura;
     }
 
-    public SprintAsignatura(Integer idSprintAsignatira, String nombreSprintAsignatura, Date fechaInicioSprintAsignatura, Date fechaTerminoSprintAsignatura) {
-        this.idSprintAsignatira = idSprintAsignatira;
+    public SprintAsignatura(Integer idSprintAsignatura, String nombreSprintAsignatura, Date fechaInicioSprintAsignatura, Date fechaTerminoSprintAsignatura) {
+        this.idSprintAsignatura = idSprintAsignatura;
         this.nombreSprintAsignatura = nombreSprintAsignatura;
         this.fechaInicioSprintAsignatura = fechaInicioSprintAsignatura;
         this.fechaTerminoSprintAsignatura = fechaTerminoSprintAsignatura;
     }
 
-    public Integer getIdSprintAsignatira() {
-        return idSprintAsignatira;
+    public SprintAsignatura(String nombreSprintAsignatura, String descripcionSprintAsignatura, Date fechaInicioSprintAsignatura, Date fechaTerminoSprintAsignatura, Asignatura idAsignatura) {
+        this.nombreSprintAsignatura = nombreSprintAsignatura;
+        this.descripcionSprintAsignatura = descripcionSprintAsignatura;
+        this.fechaInicioSprintAsignatura = fechaInicioSprintAsignatura;
+        this.fechaTerminoSprintAsignatura = fechaTerminoSprintAsignatura;
+        this.idAsignatura = idAsignatura;
     }
 
-    public void setIdSprintAsignatira(Integer idSprintAsignatira) {
-        this.idSprintAsignatira = idSprintAsignatira;
+    public Integer getIdSprintAsignatura() {
+        return idSprintAsignatura;
+    }
+
+    public void setIdSprintAsignatura(Integer idSprintAsignatura) {
+        this.idSprintAsignatura = idSprintAsignatura;
     }
 
     public String getNombreSprintAsignatura() {
@@ -148,7 +158,7 @@ public class SprintAsignatura implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idSprintAsignatira != null ? idSprintAsignatira.hashCode() : 0);
+        hash += (idSprintAsignatura != null ? idSprintAsignatura.hashCode() : 0);
         return hash;
     }
 
@@ -159,7 +169,7 @@ public class SprintAsignatura implements Serializable {
             return false;
         }
         SprintAsignatura other = (SprintAsignatura) object;
-        if ((this.idSprintAsignatira == null && other.idSprintAsignatira != null) || (this.idSprintAsignatira != null && !this.idSprintAsignatira.equals(other.idSprintAsignatira))) {
+        if ((this.idSprintAsignatura == null && other.idSprintAsignatura != null) || (this.idSprintAsignatura != null && !this.idSprintAsignatura.equals(other.idSprintAsignatura))) {
             return false;
         }
         return true;
@@ -167,7 +177,7 @@ public class SprintAsignatura implements Serializable {
 
     @Override
     public String toString() {
-        return "cl.usach.entities.SprintAsignatura[ idSprintAsignatira=" + idSprintAsignatira + " ]";
+        return "cl.usach.entities.SprintAsignatura[ idSprintAsignatura=" + idSprintAsignatura + " ]";
     }
     
 }
