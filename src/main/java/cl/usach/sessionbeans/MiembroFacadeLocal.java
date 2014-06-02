@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Cuenta;
 import cl.usach.entities.Miembro;
 import cl.usach.entities.Tablero;
 import java.util.List;
@@ -41,5 +42,11 @@ public interface MiembroFacadeLocal {
     Miembro buscarMiembroPorIdTableroYIdMiembroExt(Tablero tablero, String idMiembroExt);
 
     Boolean existeMiembroPorIdTableroYIdMiembroExt(Tablero tablero, String idMiembroExt);
+
+    Miembro buscarPorIdTableroYNombreUsuario(Tablero idTablero, String nombreUsuarioMiembro);
+
+    Boolean existeMiembroPorIdTableroYNombreUsuario(Tablero idTablero, String nombreUsuarioMiembro);
+
+    List<Miembro> buscarPoIdTableroYIdCuenta(Tablero idTablero, Cuenta idCuenta);
     
 }

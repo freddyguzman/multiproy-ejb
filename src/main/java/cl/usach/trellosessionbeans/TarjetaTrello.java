@@ -17,7 +17,6 @@ import cl.usach.gettrello.Trello;
 import cl.usach.gettrello.TrelloMake;
 import cl.usach.sessionbeans.DetalleUsuarioTarjetaFacadeLocal;
 import cl.usach.sessionbeans.EstadoTarjetaFacadeLocal;
-import cl.usach.sessionbeans.ListaFacade;
 import cl.usach.sessionbeans.ListaFacadeLocal;
 import cl.usach.sessionbeans.MiembroFacadeLocal;
 import cl.usach.sessionbeans.TarjetaFacadeLocal;
@@ -27,14 +26,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
@@ -117,7 +114,7 @@ public class TarjetaTrello implements TarjetaTrelloLocal {
                     Lista lista = listaFacade.buscarPorIdExt(cardElement.getIdList());
                     EstadoTarjeta estadoTarjeta = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("Agregada");
                     Tarjeta tarjeta = new Tarjeta(estadoTarjeta, cardElement.getId(), cardElement.getName()
-                            , dateDue, lista, equipo.getIdTablero());
+                            , dateDue, lista, equipo.getIdTablero());                    
                     tarjetaFacade.create(tarjeta);
                     
                     //Agregar Miembros asignados a la tarjeta

@@ -43,6 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByRolUsuario", query = "SELECT u FROM Usuario u WHERE u.idRolUsuario = :idRolUsuario")
 })
 public class Usuario implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<SprintGrupos> sprintGruposList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -189,6 +191,15 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.Usuario[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @XmlTransient
+    public List<SprintGrupos> getSprintGruposList() {
+        return sprintGruposList;
+    }
+
+    public void setSprintGruposList(List<SprintGrupos> sprintGruposList) {
+        this.sprintGruposList = sprintGruposList;
     }
     
 }

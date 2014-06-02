@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Actividad.findAll", query = "SELECT a FROM Actividad a"),
     @NamedQuery(name = "Actividad.findByIdActividad", query = "SELECT a FROM Actividad a WHERE a.idActividad = :idActividad"),
     @NamedQuery(name = "Actividad.findByIdActividadExt", query = "SELECT a FROM Actividad a WHERE a.idActividadExt = :idActividadExt"),
-    @NamedQuery(name = "Actividad.findByFechaActividad", query = "SELECT a FROM Actividad a WHERE a.fechaActividad = :fechaActividad")})
+    @NamedQuery(name = "Actividad.findByFechaActividad", query = "SELECT a FROM Actividad a WHERE a.fechaActividad = :fechaActividad"),
+    @NamedQuery(name = "Actividad.findByTableroYDesc", query = "SELECT a FROM Actividad a WHERE a.idMiembro.idTablero = :idTablero ORDER BY a.idActividad DESC")
+})
 public class Actividad implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

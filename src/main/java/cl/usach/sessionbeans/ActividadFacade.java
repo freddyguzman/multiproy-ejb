@@ -7,6 +7,7 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Actividad;
+import cl.usach.entities.Tablero;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,5 +50,30 @@ public class ActividadFacade extends AbstractFacade<Actividad> implements Activi
             return true;
         }
     }
+
+    @Override
+    public Actividad buscarUltimaActividad(Tablero tablero) {
+        Query query;
+        query = em.createNamedQuery("Actividad.findByTableroYDesc")
+                .setParameter("idTablero", tablero)
+                .setMaxResults(1);
+        if(!query.getResultList().isEmpty()){
+            return (Actividad) query.getResultList().get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean existeActividadPorTablero(Tablero tablero) {
+        Query query;
+        query = em.createNamedQuery("Actividad.findByTableroYDesc")
+                .setParameter("idTablero", tablero)
+                .setMaxResults(1);
+        if(query.getResultList().isEmpty()){
+            return false; 
+        }
+        return true;
+    }
+    
     
 }

@@ -27,6 +27,7 @@ import cl.usach.sessionbeans.TipoCuentaFacadeLocal;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -64,10 +65,30 @@ public class ActividadTrello implements ActividadTrelloLocal {
         trello.setConfigTrello(equipo.getIdCuenta().getKeyCuenta(),
                 equipo.getIdCuenta().getSecretCuenta(),
                 equipo.getIdCuenta().getTokenCuenta());
-        
-        try {
+                
+        try {                        
             List<ActionElement> actionElements =  trello.getActions(equipo.getIdTablero().getIdTableroExt());
             Collections.reverse(actionElements);
+            
+            if(actividadFacade.existeActividadPorTablero(equipo.getIdTablero())){                
+                Actividad ultimaActividad = actividadFacade.buscarUltimaActividad(equipo.getIdTablero());
+                List<ActionElement> auxLista = new ArrayList<>();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                Calendar cal = Calendar.getInstance();
+                for (ActionElement actionElement : actionElements) {
+                    Date date = null;
+                    if(actionElement.getDate() != null){
+                        cal.setTime(formatter.parse(actionElement.getDate()));
+                        cal.add(Calendar.HOUR, -4);
+                        date = cal.getTime();
+                    }
+                    if(ultimaActividad.getFechaActividad().after(date)){
+                        auxLista.add(actionElement);
+                    }
+                }
+                actionElements.removeAll(auxLista);
+            }
+            
             for (ActionElement actionElement : actionElements) {
                 
                 TipoActividad tipoActividad;
@@ -91,10 +112,12 @@ public class ActividadTrello implements ActividadTrelloLocal {
                         date = cal.getTime();
                     }
                     Actividad actividad = new Actividad(actionElement.getId(), date, tipoActividad);
+                    //Asignar miembro si es que existe
                     if(miembroFacade.existeMiembroPorIdTableroYIdMiembroExt(equipo.getIdTablero(), actionElement.getIdMemberCreator())){
                         Miembro miembro = miembroFacade.buscarMiembroPorIdTableroYIdMiembroExt(equipo.getIdTablero(), actionElement.getIdMemberCreator());
                         actividad.setIdMiembro(miembro);
                     }
+                    //Asignar tarjeta si es que tiene
                     if(actionElement.getCardId() != null){
                         if(tarjetaFacade.existeTarjetaPorIdTarjetaExt(actionElement.getCardId())){
                             Tarjeta tarjeta = tarjetaFacade.buscarPorIdTarjetaExt(actionElement.getCardId());
@@ -134,14 +157,42 @@ public class ActividadTrello implements ActividadTrelloLocal {
                                         }
                                     }                                 
                                 }
+                            }else{
+                                //Instrucciones si la tarjeta no se crea en la primera lista del tablero
+                                if(tipoActividad.getNombreTipoActividad().equals("createCard")){
+                                    //Agregar Fecha de creacion
+                                    tarjeta.setFechaCreacionTarjeta(date);
+                                    
+                                    List<Lista> listaPU = listaFacade.buscarPrimeraYUltimaPorTablero(equipo.getIdTablero());
+                                    if(!listaPU.isEmpty()){
+                                        //Si la tarjeta se crea en la ultima lista
+                                        if(listaPU.get(1) != null 
+                                                && listaPU.get(1).getIdLista().equals(tarjeta.getIdLista().getIdLista())){
+                                            EstadoTarjeta estado = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("Terminada");
+                                            tarjeta.setIdEstadoTarjeta(estado);
+                                            tarjeta.setFechaInicioTarjeta(date);
+                                            tarjeta.setFechaFinalTarjeta(date);
+                                            tarjetaFacade.edit(tarjeta);
+                                        }else{
+                                            //Si la tarjeta se crea en cualquier otra lista que no sea la primera ni la ultima
+                                            if(listaPU.get(0) != null 
+                                                    && !listaPU.get(0).getIdLista().equals(tarjeta.getIdLista().getIdLista())){
+                                                EstadoTarjeta estado = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("En proceso");
+                                                tarjeta.setIdEstadoTarjeta(estado);
+                                                tarjeta.setFechaInicioTarjeta(date);
+                                                tarjetaFacade.edit(tarjeta);
+                                            }
+                                        }
+                                    }
+                                }
                             }
+                            
                         }
                     }
                     actividadFacade.create(actividad);
                 }
                 
             }
-            //System.out.println(actionElements);
         } catch (IOException | JSONException | ParseException ex) {
             Logger.getLogger(ActividadTrello.class.getName()).log(Level.SEVERE, null, ex);
         }

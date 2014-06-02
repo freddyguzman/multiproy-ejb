@@ -7,6 +7,7 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Actividad;
+import cl.usach.entities.Tablero;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -34,5 +35,9 @@ public interface ActividadFacadeLocal {
     Actividad buscarPorIdActividadExt(String idActividadExt);
 
     Boolean existeActividadPorIdActividadExt(String idActividadExt);
+
+    Actividad buscarUltimaActividad(Tablero tablero);
+
+    Boolean existeActividadPorTablero(Tablero tablero);
     
 }

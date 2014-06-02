@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Cuenta;
 import cl.usach.entities.Miembro;
 import cl.usach.entities.Tablero;
 import java.util.List;
@@ -80,6 +81,35 @@ public class MiembroFacade extends AbstractFacade<Miembro> implements MiembroFac
         }else{
             return true;
         }
+    }
+
+    @Override
+    public Miembro buscarPorIdTableroYNombreUsuario(Tablero idTablero, String nombreUsuarioMiembro) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByIdTableroYNombreUsuario")
+                .setParameter("idTablero", idTablero)
+                .setParameter("nombreUsuarioMiembro", nombreUsuarioMiembro);
+        return (Miembro) query.getSingleResult();
+    }
+
+    @Override
+    public Boolean existeMiembroPorIdTableroYNombreUsuario(Tablero idTablero, String nombreUsuarioMiembro) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByIdTableroYNombreUsuario")
+                .setParameter("idTablero", idTablero)
+                .setParameter("nombreUsuarioMiembro", nombreUsuarioMiembro);
+        
+        if(query.getResultList().isEmpty()) return false;
+        return true;
+    }
+
+    @Override
+    public List<Miembro> buscarPoIdTableroYIdCuenta(Tablero idTablero, Cuenta idCuenta) {
+        Query query;
+        query = em.createNamedQuery("Miembro.findByIdTableroYIdCuenta")
+                .setParameter("idTablero", idTablero)
+                .setParameter("idCuenta", idCuenta);
+        return query.getResultList();
     }
     
 }

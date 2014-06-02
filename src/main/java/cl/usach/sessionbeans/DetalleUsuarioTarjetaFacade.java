@@ -63,7 +63,7 @@ public class DetalleUsuarioTarjetaFacade extends AbstractFacade<DetalleUsuarioTa
         query = em.createNamedQuery("DetalleUsuarioTarjeta.finByIdTarjeta")
                 .setParameter("idTarjeta", idTarjeta);
         return query.getResultList();
-    }
+    }   
 
     @Override
     public List<DetalleUsuarioTarjeta> buscarPorIdMiembro(Miembro idMiembro) {
@@ -90,6 +90,15 @@ public class DetalleUsuarioTarjetaFacade extends AbstractFacade<DetalleUsuarioTa
                 .setParameter("idTablero", idTablero)
                 .setParameter("idLista", idLista);
         return query.getResultList();
+    }
+
+    @Override
+    public Boolean existeDetalleUsuarioTarjetaPorIdTarjeta(Tarjeta idTarjeta) {
+        Query query;
+        query = em.createNamedQuery("DetalleUsuarioTarjeta.finByIdTarjeta")
+                .setParameter("idTarjeta", idTarjeta);
+        if(query.getResultList().isEmpty()) return false;
+        else return true;
     }
     
 }

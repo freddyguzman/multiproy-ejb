@@ -46,5 +46,7 @@ public interface DetalleUsuarioTarjetaFacadeLocal {
     List<DetalleUsuarioTarjeta> buscarPorIdMiembroYIdTablero(Miembro idMiembro, Tablero idTablero);
 
     List<DetalleUsuarioTarjeta> buscarPorIdMiembroYIdTableroYNoLista(Miembro idMiembro, Tablero idTablero, Lista idLista);
+
+    Boolean existeDetalleUsuarioTarjetaPorIdTarjeta(Tarjeta idTarjeta);
     
 }

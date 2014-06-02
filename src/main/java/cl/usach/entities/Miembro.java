@@ -39,7 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Miembro.findByIdMiembroExt", query = "SELECT m FROM Miembro m WHERE m.idMiembroExt = :idMiembroExt"),
     @NamedQuery(name = "Miembro.findByNombreUsuarioMiembro", query = "SELECT m FROM Miembro m WHERE m.nombreUsuarioMiembro = :nombreUsuarioMiembro"),
     @NamedQuery(name = "Miembro.findByidTablero", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero"),
-    @NamedQuery(name = "Miembro.findByidTableroYIdMiembroExt", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero and m.idMiembroExt = :idMiembroExt")
+    @NamedQuery(name = "Miembro.findByidTableroYIdMiembroExt", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero and m.idMiembroExt = :idMiembroExt"),
+    @NamedQuery(name = "Miembro.findByIdTableroYNombreUsuario", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero and m.nombreUsuarioMiembro = :nombreUsuarioMiembro"),
+    @NamedQuery(name = "Miembro.findByIdTableroYIdCuenta", query = "SELECT m FROM Miembro m WHERE m.idTablero = :idTablero and m.idCuenta = :idCuenta")
 })
 public class Miembro implements Serializable {
     @JoinColumn(name = "ID_TABLERO", referencedColumnName = "ID_TABLERO")

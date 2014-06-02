@@ -44,7 +44,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tarjeta.findByFechaLimiteTarjeta", query = "SELECT t FROM Tarjeta t WHERE t.fechaLimiteTarjeta = :fechaLimiteTarjeta"),
     @NamedQuery(name = "Tarjeta.findByIdTablero", query = "SELECT t FROM Tarjeta t WHERE t.idTablero = :idTablero")
 })
-public class Tarjeta implements Serializable {
+public class Tarjeta implements Serializable,Comparable<Tarjeta> {
+    @Column(name = "FECHA_CREACION_TARJETA")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacionTarjeta;
     @JoinColumn(name = "ID_ESTADO_TARJETA", referencedColumnName = "ID_ESTADO_TARJETA")
     @ManyToOne(optional = false)
     private EstadoTarjeta idEstadoTarjeta;
@@ -229,4 +232,21 @@ public class Tarjeta implements Serializable {
         this.idEstadoTarjeta = idEstadoTarjeta;
     }
 
+    public Date getFechaCreacionTarjeta() {
+        return fechaCreacionTarjeta;
+    }
+
+    public void setFechaCreacionTarjeta(Date fechaCreacionTarjeta) {
+        this.fechaCreacionTarjeta = fechaCreacionTarjeta;
+    }
+    
+    @Override
+    public int compareTo(Tarjeta tarjeta){
+        if (this.fechaCreacionTarjeta.after(tarjeta.getFechaCreacionTarjeta()))
+            return 1;
+        else if (this.fechaCreacionTarjeta.equals(tarjeta.getFechaCreacionTarjeta()))
+            return 0;
+        else 
+            return -1;
+    }
 }

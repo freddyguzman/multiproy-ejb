@@ -8,7 +8,6 @@ package cl.usach.kanbanizesessionbeans;
 
 import cl.usach.elements.BoardElement;
 import cl.usach.elements.ProjectElement;
-import cl.usach.elements.SettingElement;
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
 import cl.usach.entities.Tablero;
@@ -34,7 +33,7 @@ public class TableroKanbanize implements TableroKanbanizeLocal {
         for (ProjectElement projectElement : projects) {
             List<BoardElement> boards = projectElement.getBoardElements();
             for (BoardElement boardElement : boards) {
-                Tablero tablero = new Tablero(projectElement.getId() + projectElement.getName()+ boardElement.getId() + boardElement.getName(),
+                Tablero tablero = new Tablero(cuenta.getKeyCuenta()+boardElement.getId(),
                         boardElement.getName(), "https://kanbanize.com/ctrl_board/" + boardElement.getId());
                 Equipo equipo = new Equipo(cuenta, tablero);
                 equipos.add(equipo);

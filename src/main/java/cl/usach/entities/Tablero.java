@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,6 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tablero.findByNombreTablero", query = "SELECT t FROM Tablero t WHERE t.nombreTablero = :nombreTablero"),
     @NamedQuery(name = "Tablero.findByUrlTablero", query = "SELECT t FROM Tablero t WHERE t.urlTablero = :urlTablero")})
 public class Tablero implements Serializable {
+    @JoinColumn(name = "ID_SPRINT_GRUPO", referencedColumnName = "ID_SPRINT_GRUPO")
+    @ManyToOne
+    private SprintGrupos idSprintGrupo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTablero")
     private List<Miembro> miembroList;
     private static final long serialVersionUID = 1L;
@@ -179,6 +184,14 @@ public class Tablero implements Serializable {
 
     public void setMiembroList(List<Miembro> miembroList) {
         this.miembroList = miembroList;
+    }
+
+    public SprintGrupos getIdSprintGrupo() {
+        return idSprintGrupo;
+    }
+
+    public void setIdSprintGrupo(SprintGrupos idSprintGrupo) {
+        this.idSprintGrupo = idSprintGrupo;
     }
     
 }
