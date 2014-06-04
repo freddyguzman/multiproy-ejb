@@ -7,6 +7,7 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Tablero;
+import cl.usach.entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -36,5 +37,7 @@ public interface TableroFacadeLocal {
     public Boolean existeTableroPorIdTableroExt(String idTableroExt);
     
     public Tablero buscarPorIdTableroExt(String idTableroExt);
+
+    List<Tablero> buscarPorProfesor(Usuario idUsuario);
     
 }

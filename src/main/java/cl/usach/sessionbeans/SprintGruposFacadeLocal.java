@@ -8,6 +8,7 @@ package cl.usach.sessionbeans;
 
 import cl.usach.entities.SprintAsignatura;
 import cl.usach.entities.SprintGrupos;
+import cl.usach.entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -33,5 +34,13 @@ public interface SprintGruposFacadeLocal {
     int count();
 
     List<SprintGrupos> buscarPorSprintAsignatura(SprintAsignatura idSprintAsignatura);
+
+    List<SprintGrupos> buscarPorUsuario(Usuario idUsuario);
+
+    Boolean existeSprintGrupoPorUsuario(Usuario idUsuario);
+
+    SprintGrupos buscarPorId(int idSprintGrupo);
+
+    List<SprintGrupos> buscarPorProfesor(Usuario idUsuario);
     
 }

@@ -45,6 +45,12 @@ public class MiembroTrello implements MiembroTrelloLocal {
             for (MemberElement memberElement : membersElement) {
                 if(miembroFacade.existeMiembroPorIdTableroYIdMiembroExt(equipo.getIdTablero(), memberElement.getId())){
                     Miembro miembro = miembroFacade.buscarMiembroPorIdTableroYIdMiembroExt(equipo.getIdTablero(), memberElement.getId());
+                    if(cuentaFacade.existeCuentaPorUsuarioCuenta(memberElement.getUsername())){
+                        Cuenta cuenta = cuentaFacade.buscarPorNombreUsuarioCuenta(memberElement.getUsername());
+                        miembro.setIdCuenta(cuenta);
+                    }
+                    miembroFacade.edit(miembro);
+                    
                     if(miembrosActual.contains(miembro)){
                         miembrosActual.remove(miembro);
                     }                   

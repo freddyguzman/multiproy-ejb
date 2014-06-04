@@ -7,6 +7,8 @@
 package cl.usach.sessionbeans;
 
 import cl.usach.entities.Tablero;
+import cl.usach.entities.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -56,6 +58,14 @@ public class TableroFacade extends AbstractFacade<Tablero> implements TableroFac
         query = em.createNamedQuery("Tablero.findByIdTableroExt")
                 .setParameter("idTableroExt", idTableroExt);
         return (Tablero)query.getSingleResult();
+    }
+
+    @Override
+    public List<Tablero> buscarPorProfesor(Usuario idUsuario) {
+        Query query;
+        query = em.createNamedQuery("Tablero.findByUsuarioProfesor")
+                .setParameter("idUsuario", idUsuario);
+        return query.getResultList();
     }
     
 }

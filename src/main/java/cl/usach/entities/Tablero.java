@@ -38,7 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tablero.findByIdTablero", query = "SELECT t FROM Tablero t WHERE t.idTablero = :idTablero"),
     @NamedQuery(name = "Tablero.findByIdTableroExt", query = "SELECT t FROM Tablero t WHERE t.idTableroExt = :idTableroExt"),
     @NamedQuery(name = "Tablero.findByNombreTablero", query = "SELECT t FROM Tablero t WHERE t.nombreTablero = :nombreTablero"),
-    @NamedQuery(name = "Tablero.findByUrlTablero", query = "SELECT t FROM Tablero t WHERE t.urlTablero = :urlTablero")})
+    @NamedQuery(name = "Tablero.findByUrlTablero", query = "SELECT t FROM Tablero t WHERE t.urlTablero = :urlTablero"),
+    @NamedQuery(name = "Tablero.findByUsuarioProfesor", query = "SELECT t FROM Tablero t WHERE t.idSprintGrupo.idSprintAsignatura.idAsignatura.idUsuario = :idUsuario"),
+    @NamedQuery(name = "Tablero.findByidSprintGrupo", query = "SELECT t FROM Tablero t WHERE t.idSprintGrupo = :idSprintGrupo")
+})
 public class Tablero implements Serializable {
     @JoinColumn(name = "ID_SPRINT_GRUPO", referencedColumnName = "ID_SPRINT_GRUPO")
     @ManyToOne

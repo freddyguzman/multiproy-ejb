@@ -8,6 +8,7 @@ package cl.usach.sessionbeans;
 
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
+import cl.usach.entities.SprintGrupos;
 import cl.usach.entities.Tablero;
 import cl.usach.entities.Usuario;
 import java.util.List;
@@ -45,5 +46,9 @@ public interface EquipoFacadeLocal {
     Equipo buscarUnEquipoPoTablero(Tablero tablero);
 
     List<Equipo> buscarPorUsuario(Usuario usuario);
+
+    List<Equipo> buscarPorTablero(Tablero idTablero);
+
+    List<Equipo> buscarPorIdSprintGrupo(SprintGrupos idSprintGrupo);
     
 }

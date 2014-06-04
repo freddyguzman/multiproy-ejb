@@ -43,6 +43,12 @@ public class MiembroKanbanize implements MiembroKanbanizeLocal {
             
             if(miembroFacade.existeMiembroPorIdTableroYIdMiembroExt(equipo.getIdTablero(), idMiembroExt)){
                 Miembro miembro = miembroFacade.buscarMiembroPorIdTableroYIdMiembroExt(equipo.getIdTablero(), idMiembroExt);
+                if(cuentaFacade.existeCuentaPorUsuarioCuenta(miembroNuevo)){
+                    Cuenta cuenta = cuentaFacade.buscarPorNombreUsuarioCuenta(miembroNuevo);
+                    miembro.setIdCuenta(cuenta);
+                }
+                miembroFacade.edit(miembro);
+                
                 if(miembrosActual.contains(miembro)){
                     miembrosActual.remove(miembro);
                 } 

@@ -7,7 +7,6 @@
 package cl.usach.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Equipo.findByCuentaAndIdTableroExt", query = "SELECT e FROM Equipo e WHERE e.idCuenta = :idCuenta AND e.idTablero.idTableroExt = :idTableroExt"),
     @NamedQuery(name = "Equipo.findByCuenta", query = "SELECT e FROM Equipo e WHERE e.idCuenta = :idCuenta"),
     @NamedQuery(name = "Equipo.findByTablero", query = "SELECT e FROM Equipo e WHERE e.idTablero = :idTablero"),
-    @NamedQuery(name = "Equipo.findByUsuario" , query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario")
+    @NamedQuery(name = "Equipo.findByUsuario" , query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario"),
+    @NamedQuery(name = "Equipo.findByIdSprintGrupo", query = "SELECT e FROM Equipo e WHERE e.idTablero.idSprintGrupo = :idSprintGrupo")
 })
 public class Equipo implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -51,8 +49,6 @@ public class Equipo implements Serializable {
     @JoinColumn(name = "ID_TABLERO", referencedColumnName = "ID_TABLERO")
     @ManyToOne(optional = false)
     private Tablero idTablero;
-    @OneToMany(mappedBy = "idEquipo")
-    private List<Asignatura> asignaturaList;
 
     public Equipo() {
     }
@@ -60,7 +56,7 @@ public class Equipo implements Serializable {
     public Equipo(Integer idEquipo) {
         this.idEquipo = idEquipo;
     }
-
+    
     public Equipo(Cuenta idCuenta, Tablero idTablero) {
         this.idCuenta = idCuenta;
         this.idTablero = idTablero;
@@ -88,15 +84,6 @@ public class Equipo implements Serializable {
 
     public void setIdTablero(Tablero idTablero) {
         this.idTablero = idTablero;
-    }
-
-    @XmlTransient
-    public List<Asignatura> getAsignaturaList() {
-        return asignaturaList;
-    }
-
-    public void setAsignaturaList(List<Asignatura> asignaturaList) {
-        this.asignaturaList = asignaturaList;
     }
 
     @Override

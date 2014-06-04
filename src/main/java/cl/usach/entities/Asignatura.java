@@ -45,8 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Asignatura.findByIdUsuario", query = "SELECT a FROM Asignatura a WHERE a.idUsuario = :idUsuario")
 })
 public class Asignatura implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsignatura")
-    private List<SprintAsignatura> sprintAsignaturaList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,12 +76,11 @@ public class Asignatura implements Serializable {
     @NotNull
     @Column(name = "CIERRE_ASIGNATURA")
     private int cierreAsignatura;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsignatura")
+    private List<SprintAsignatura> sprintAsignaturaList;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
-    @JoinColumn(name = "ID_EQUIPO", referencedColumnName = "ID_EQUIPO")
-    @ManyToOne
-    private Equipo idEquipo;
 
     public Asignatura() {
     }
@@ -101,7 +98,7 @@ public class Asignatura implements Serializable {
         this.anoAsignatura = anoAsignatura;
         this.cierreAsignatura = cierreAsignatura;
     }
-
+    
     public Asignatura(String nombreAsignatura, int creditoAsignatura, int horasDeTrabajoAsignatura, int semestreAsignatura, int anoAsignatura, int cierreAsignatura, Usuario idUsuario) {
         this.nombreAsignatura = nombreAsignatura;
         this.creditoAsignatura = creditoAsignatura;
@@ -168,20 +165,21 @@ public class Asignatura implements Serializable {
         this.cierreAsignatura = cierreAsignatura;
     }
 
+    @XmlTransient
+    public List<SprintAsignatura> getSprintAsignaturaList() {
+        return sprintAsignaturaList;
+    }
+
+    public void setSprintAsignaturaList(List<SprintAsignatura> sprintAsignaturaList) {
+        this.sprintAsignaturaList = sprintAsignaturaList;
+    }
+
     public Usuario getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public Equipo getIdEquipo() {
-        return idEquipo;
-    }
-
-    public void setIdEquipo(Equipo idEquipo) {
-        this.idEquipo = idEquipo;
     }
 
     @Override
@@ -207,15 +205,6 @@ public class Asignatura implements Serializable {
     @Override
     public String toString() {
         return "cl.usach.entities.Asignatura[ idAsignatura=" + idAsignatura + " ]";
-    }
-
-    @XmlTransient
-    public List<SprintAsignatura> getSprintAsignaturaList() {
-        return sprintAsignaturaList;
-    }
-
-    public void setSprintAsignaturaList(List<SprintAsignatura> sprintAsignaturaList) {
-        this.sprintAsignaturaList = sprintAsignaturaList;
     }
     
 }

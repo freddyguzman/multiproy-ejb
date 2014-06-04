@@ -8,7 +8,6 @@ package cl.usach.sessionbeans;
 
 import cl.usach.entities.Asignatura;
 import cl.usach.entities.SprintAsignatura;
-import cl.usach.kanbanizesessionbeans.AbstractFacade;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

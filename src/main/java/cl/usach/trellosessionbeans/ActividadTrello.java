@@ -134,6 +134,7 @@ public class ActividadTrello implements ActividadTrelloLocal {
                                         EstadoTarjeta estado = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("En proceso");
                                         tarjeta.setIdEstadoTarjeta(estado);
                                         tarjeta.setFechaInicioTarjeta(date);
+                                        if(tarjeta.getFechaCreacionTarjeta() == null) tarjeta.setFechaCreacionTarjeta(date);
                                         tarjetaFacade.edit(tarjeta);
                                     }else{
                                         //Da fecha fin de la tarjeta
@@ -143,6 +144,7 @@ public class ActividadTrello implements ActividadTrelloLocal {
                                             EstadoTarjeta estado = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("Terminada");
                                             tarjeta.setIdEstadoTarjeta(estado);
                                             tarjeta.setFechaFinalTarjeta(date);
+                                            if(tarjeta.getFechaCreacionTarjeta() == null) tarjeta.setFechaCreacionTarjeta(date);
                                             tarjetaFacade.edit(tarjeta);
                                         }else{
                                             //Eliminar fecha fin de la tarjeta
@@ -152,6 +154,7 @@ public class ActividadTrello implements ActividadTrelloLocal {
                                                 EstadoTarjeta estado = estadoTarjetaFacade.buscarPorNombreEstadoTarjeta("En proceso");
                                                 tarjeta.setIdEstadoTarjeta(estado);
                                                 tarjeta.setFechaFinalTarjeta(null);
+                                                if(tarjeta.getFechaCreacionTarjeta() == null) tarjeta.setFechaCreacionTarjeta(date);
                                                 tarjetaFacade.edit(tarjeta);
                                             }
                                         }

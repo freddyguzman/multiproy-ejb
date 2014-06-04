@@ -8,7 +8,7 @@ package cl.usach.sessionbeans;
 
 import cl.usach.entities.SprintAsignatura;
 import cl.usach.entities.SprintGrupos;
-import cl.usach.kanbanizesessionbeans.AbstractFacade;
+import cl.usach.entities.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,5 +40,41 @@ public class SprintGruposFacade extends AbstractFacade<SprintGrupos> implements 
                 .setParameter("idSprintAsignatura", idSprintAsignatura);
         return query.getResultList();
     }
+
+    @Override
+    public List<SprintGrupos> buscarPorUsuario(Usuario idUsuario) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByUsuarioSMaster")
+                .setParameter("idUsuario", idUsuario);
+        return query.getResultList();
+    }
+
+    @Override
+    public Boolean existeSprintGrupoPorUsuario(Usuario idUsuario) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByUsuarioSMaster")
+                .setParameter("idUsuario", idUsuario);
+        if(query.getResultList().isEmpty()) return false;
+        return true;
+    }
+
+    @Override
+    public SprintGrupos buscarPorId(int idSprintGrupo) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByIdSprintGrupo")
+                .setParameter("idSprintGrupo", idSprintGrupo);
+        if(!query.getResultList().isEmpty())
+            return (SprintGrupos) query.getSingleResult();
+        return null;
+    }
+
+    @Override
+    public List<SprintGrupos> buscarPorProfesor(Usuario idUsuario) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByUsuarioProfesor")
+                .setParameter("idUsuario", idUsuario);
+        return query.getResultList();
+    }
+    
     
 }

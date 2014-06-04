@@ -8,6 +8,7 @@ package cl.usach.sessionbeans;
 
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
+import cl.usach.entities.SprintGrupos;
 import cl.usach.entities.Tablero;
 import cl.usach.entities.Usuario;
 import java.util.List;
@@ -91,6 +92,21 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
                 .setParameter("idUsuario", usuario);
         return query.getResultList();
     }
-    
+
+    @Override
+    public List<Equipo> buscarPorTablero(Tablero idTablero) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByTablero")
+                .setParameter("idTablero", idTablero);
+        return query.getResultList();
+    }   
+
+    @Override
+    public List<Equipo> buscarPorIdSprintGrupo(SprintGrupos idSprintGrupo) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByIdSprintGrupo")
+                .setParameter("idSprintGrupo", idSprintGrupo);
+        return query.getResultList();
+    }
     
 }
