@@ -34,7 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Equipo.findByCuenta", query = "SELECT e FROM Equipo e WHERE e.idCuenta = :idCuenta"),
     @NamedQuery(name = "Equipo.findByTablero", query = "SELECT e FROM Equipo e WHERE e.idTablero = :idTablero"),
     @NamedQuery(name = "Equipo.findByUsuario" , query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Equipo.findByIdSprintGrupo", query = "SELECT e FROM Equipo e WHERE e.idTablero.idSprintGrupo = :idSprintGrupo")
+    @NamedQuery(name = "Equipo.findByIdSprintGrupo", query = "SELECT e FROM Equipo e WHERE e.idTablero.idSprintGrupo = :idSprintGrupo"),
+    @NamedQuery(name = "Equipo.findByUsuarioAsignaturas", query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario GROUP BY e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura"),
+    @NamedQuery(name = "Equipo.findByUsuarioYAsignatura" , query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario and e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura = :idAsignatura"),
+    @NamedQuery(name = "Equipo.findUsuariosByAsignatura", query = "SELECT e.idCuenta.idUsuario FROM Equipo e WHERE e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura = :idAsignatura GROUP BY e.idCuenta.idUsuario")
 })
 public class Equipo implements Serializable {
     private static final long serialVersionUID = 1L;

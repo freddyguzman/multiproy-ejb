@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Asignatura;
 import cl.usach.entities.SprintAsignatura;
 import cl.usach.entities.SprintGrupos;
 import cl.usach.entities.Usuario;
@@ -42,5 +43,9 @@ public interface SprintGruposFacadeLocal {
     SprintGrupos buscarPorId(int idSprintGrupo);
 
     List<SprintGrupos> buscarPorProfesor(Usuario idUsuario);
+
+    List<SprintGrupos> buscarPorUsuarioSMasterYAsignatura(Usuario idUsuario, Asignatura idAsignatura);
+
+    Boolean existePorUsuarioSMasterYAsignatura(Usuario idUsuario, Asignatura idAsignatura);
     
 }

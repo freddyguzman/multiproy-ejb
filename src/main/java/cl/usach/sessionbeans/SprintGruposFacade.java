@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Asignatura;
 import cl.usach.entities.SprintAsignatura;
 import cl.usach.entities.SprintGrupos;
 import cl.usach.entities.Usuario;
@@ -74,6 +75,25 @@ public class SprintGruposFacade extends AbstractFacade<SprintGrupos> implements 
         query = em.createNamedQuery("SprintGrupos.findByUsuarioProfesor")
                 .setParameter("idUsuario", idUsuario);
         return query.getResultList();
+    }
+
+    @Override
+    public List<SprintGrupos> buscarPorUsuarioSMasterYAsignatura(Usuario idUsuario, Asignatura idAsignatura) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByUsuarioSMasterYAsignatura")
+                .setParameter("idUsuario", idUsuario)
+                .setParameter("idAsignatura", idAsignatura);
+        return query.getResultList();
+    }
+
+    @Override
+    public Boolean existePorUsuarioSMasterYAsignatura(Usuario idUsuario, Asignatura idAsignatura) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByUsuarioSMasterYAsignatura")
+                .setParameter("idUsuario", idUsuario)
+                .setParameter("idAsignatura", idAsignatura);
+        if(query.getResultList().isEmpty()) return false;
+        return true;
     }
     
     

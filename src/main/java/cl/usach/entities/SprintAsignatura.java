@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SprintAsignatura.findByFechaTerminoSprintAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.fechaTerminoSprintAsignatura = :fechaTerminoSprintAsignatura"),
     @NamedQuery(name = "SprintAsignatura.findByAsignatura", query = "SELECT s FROM SprintAsignatura s WHERE s.idAsignatura = :idAsignatura")
 })
-public class SprintAsignatura implements Serializable {
+public class SprintAsignatura implements Serializable,Comparable<SprintAsignatura> {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -180,4 +180,13 @@ public class SprintAsignatura implements Serializable {
         return "cl.usach.entities.SprintAsignatura[ idSprintAsignatura=" + idSprintAsignatura + " ]";
     }
     
+    @Override
+    public int compareTo(SprintAsignatura sprintA){
+        if (this.fechaInicioSprintAsignatura.after(sprintA.getFechaInicioSprintAsignatura()))
+            return 1;
+        else if (this.fechaInicioSprintAsignatura.equals(sprintA.getFechaInicioSprintAsignatura()))
+            return 0;
+        else 
+            return -1;
+    }    
 }

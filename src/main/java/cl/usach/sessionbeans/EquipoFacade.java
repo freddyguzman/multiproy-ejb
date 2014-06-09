@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Asignatura;
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
 import cl.usach.entities.SprintGrupos;
@@ -108,5 +109,40 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
                 .setParameter("idSprintGrupo", idSprintGrupo);
         return query.getResultList();
     }
+
+    @Override
+    public Equipo buscarPorId(int idEquipo) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByIdEquipo")
+                .setParameter("idEquipo", idEquipo);
+        if(!query.getResultList().isEmpty()) return (Equipo) query.getSingleResult();
+        return null;
+    }
+
+    @Override
+    public List<Equipo> buscarPorUsuarioGBYAsignatura(Usuario idUsuario) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByUsuarioAsignaturas")
+                .setParameter("idUsuario", idUsuario);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Equipo> buscarPorUsuarioyAsignatura(Usuario idUsuario, Asignatura idAsignatura) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByUsuarioYAsignatura")
+                .setParameter("idUsuario", idUsuario)
+                .setParameter("idAsignatura", idAsignatura);
+        return query.getResultList();   
+    }
+
+    @Override
+    public List<Usuario> buscarUsuariosPorAsignatura(Asignatura idAsignatura) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findUsuariosByAsignatura")
+                .setParameter("idAsignatura",idAsignatura);
+        return query.getResultList();
+    }
+    
     
 }

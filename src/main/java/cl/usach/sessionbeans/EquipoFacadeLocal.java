@@ -6,6 +6,7 @@
 
 package cl.usach.sessionbeans;
 
+import cl.usach.entities.Asignatura;
 import cl.usach.entities.Cuenta;
 import cl.usach.entities.Equipo;
 import cl.usach.entities.SprintGrupos;
@@ -50,5 +51,13 @@ public interface EquipoFacadeLocal {
     List<Equipo> buscarPorTablero(Tablero idTablero);
 
     List<Equipo> buscarPorIdSprintGrupo(SprintGrupos idSprintGrupo);
+
+    Equipo buscarPorId(int idEquipo);
+
+    List<Equipo> buscarPorUsuarioGBYAsignatura(Usuario idUsuario);
+
+    List<Equipo> buscarPorUsuarioyAsignatura(Usuario idUsuario, Asignatura idAsignatura);
+
+    List<Usuario> buscarUsuariosPorAsignatura(Asignatura idAsignatura);
     
 }
