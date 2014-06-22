@@ -59,5 +59,7 @@ public interface EquipoFacadeLocal {
     List<Equipo> buscarPorUsuarioyAsignatura(Usuario idUsuario, Asignatura idAsignatura);
 
     List<Usuario> buscarUsuariosPorAsignatura(Asignatura idAsignatura);
+
+    List<Equipo> buscarPorNombreSprintGrupo(String nombreSprintGrupo);
     
 }

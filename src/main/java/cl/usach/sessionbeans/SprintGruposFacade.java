@@ -95,6 +95,14 @@ public class SprintGruposFacade extends AbstractFacade<SprintGrupos> implements 
         if(query.getResultList().isEmpty()) return false;
         return true;
     }
+
+    @Override
+    public List<SprintGrupos> buscarPorAsignaturasGBSprintGrupo(Asignatura idAsignatura) {
+        Query query;
+        query = em.createNamedQuery("SprintGrupos.findByAsignaturaGBSprintGrupos")
+                .setParameter("idAsignatura", idAsignatura);
+        return query.getResultList();
+    }
     
     
 }

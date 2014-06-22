@@ -47,5 +47,7 @@ public interface SprintGruposFacadeLocal {
     List<SprintGrupos> buscarPorUsuarioSMasterYAsignatura(Usuario idUsuario, Asignatura idAsignatura);
 
     Boolean existePorUsuarioSMasterYAsignatura(Usuario idUsuario, Asignatura idAsignatura);
+
+    List<SprintGrupos> buscarPorAsignaturasGBSprintGrupo(Asignatura idAsignatura);
     
 }

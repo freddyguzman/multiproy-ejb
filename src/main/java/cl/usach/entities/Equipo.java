@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Equipo.findByIdSprintGrupo", query = "SELECT e FROM Equipo e WHERE e.idTablero.idSprintGrupo = :idSprintGrupo"),
     @NamedQuery(name = "Equipo.findByUsuarioAsignaturas", query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario GROUP BY e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura"),
     @NamedQuery(name = "Equipo.findByUsuarioYAsignatura" , query = "SELECT e FROM Equipo e WHERE e.idCuenta.idUsuario = :idUsuario and e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura = :idAsignatura"),
-    @NamedQuery(name = "Equipo.findUsuariosByAsignatura", query = "SELECT e.idCuenta.idUsuario FROM Equipo e WHERE e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura = :idAsignatura GROUP BY e.idCuenta.idUsuario")
+    @NamedQuery(name = "Equipo.findUsuariosByAsignatura", query = "SELECT e.idCuenta.idUsuario FROM Equipo e WHERE e.idTablero.idSprintGrupo.idSprintAsignatura.idAsignatura = :idAsignatura GROUP BY e.idCuenta.idUsuario"),
+    @NamedQuery(name = "Equipo.findByNombreSprintGrupo", query = "SELECT e FROM Equipo e WHERE e.idTablero.idSprintGrupo.nombreSprintGrupo = :nombreSprintGrupo")
 })
 public class Equipo implements Serializable {
     private static final long serialVersionUID = 1L;

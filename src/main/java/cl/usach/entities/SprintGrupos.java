@@ -41,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SprintGrupos.findBySprintAsigntura" , query = "SELECT s FROM SprintGrupos s WHERE s.idSprintAsignatura = :idSprintAsignatura"),
     @NamedQuery(name = "SprintGrupos.findByUsuarioSMaster", query = "SELECT s FROM SprintGrupos s WHERE s.idUsuario = :idUsuario"),
     @NamedQuery(name = "SprintGrupos.findByUsuarioProfesor", query = "SELECT s FROM SprintGrupos s WHERE s.idSprintAsignatura.idAsignatura.idUsuario = :idUsuario"),
-    @NamedQuery(name = "SprintGrupos.findByUsuarioSMasterYAsignatura" , query = "SELECT s FROM SprintGrupos s WHERE s.idUsuario = :idUsuario and s.idSprintAsignatura.idAsignatura = :idAsignatura" )
+    @NamedQuery(name = "SprintGrupos.findByUsuarioSMasterYAsignatura" , query = "SELECT s FROM SprintGrupos s WHERE s.idUsuario = :idUsuario and s.idSprintAsignatura.idAsignatura = :idAsignatura" ),
+    @NamedQuery(name = "SprintGrupos.findByAsignaturaGBSprintGrupos", query = "SELECT s FROM SprintGrupos s WHERE s.idSprintAsignatura.idAsignatura = :idAsignatura GROUP BY s.nombreSprintGrupo")
 })
 public class SprintGrupos implements Serializable {
     private static final long serialVersionUID = 1L;

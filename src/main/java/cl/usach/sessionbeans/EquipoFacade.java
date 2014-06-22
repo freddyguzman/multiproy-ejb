@@ -143,6 +143,14 @@ public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacade
                 .setParameter("idAsignatura",idAsignatura);
         return query.getResultList();
     }
+
+    @Override
+    public List<Equipo> buscarPorNombreSprintGrupo(String nombreSprintGrupo) {
+        Query query;
+        query = em.createNamedQuery("Equipo.findByNombreSprintGrupo")
+                .setParameter("nombreSprintGrupo",nombreSprintGrupo);
+        return query.getResultList();
+    }
     
     
 }
