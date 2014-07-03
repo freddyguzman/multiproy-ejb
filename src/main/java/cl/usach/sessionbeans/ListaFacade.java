@@ -21,7 +21,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ListaFacade extends AbstractFacade<Lista> implements ListaFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

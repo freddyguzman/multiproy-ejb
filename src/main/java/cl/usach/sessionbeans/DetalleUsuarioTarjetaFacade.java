@@ -23,7 +23,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class DetalleUsuarioTarjetaFacade extends AbstractFacade<DetalleUsuarioTarjeta> implements DetalleUsuarioTarjetaFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

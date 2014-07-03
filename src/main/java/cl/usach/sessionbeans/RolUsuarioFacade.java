@@ -18,7 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class RolUsuarioFacade extends AbstractFacade<RolUsuario> implements RolUsuarioFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

@@ -21,7 +21,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class MiembroFacade extends AbstractFacade<Miembro> implements MiembroFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

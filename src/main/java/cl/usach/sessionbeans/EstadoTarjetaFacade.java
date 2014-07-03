@@ -18,7 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class EstadoTarjetaFacade extends AbstractFacade<EstadoTarjeta> implements EstadoTarjetaFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

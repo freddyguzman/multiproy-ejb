@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class CuentaFacade extends AbstractFacade<Cuenta> implements CuentaFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

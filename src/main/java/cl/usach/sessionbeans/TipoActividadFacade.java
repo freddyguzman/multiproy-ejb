@@ -18,7 +18,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class TipoActividadFacade extends AbstractFacade<TipoActividad> implements TipoActividadFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

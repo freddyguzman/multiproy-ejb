@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class SprintAsignaturaFacade extends AbstractFacade<SprintAsignatura> implements SprintAsignaturaFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override

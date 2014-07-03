@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class TableroFacade extends AbstractFacade<Tablero> implements TableroFacadeLocal {
-    @PersistenceContext(unitName = "MultiproyPU")
+    @PersistenceContext(unitName = "TodoAgilPU")
     private EntityManager em;
 
     @Override
